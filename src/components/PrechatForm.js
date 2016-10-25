@@ -26,7 +26,7 @@ class PrechatForm extends Component {
     if (!msg) return;
 
     zChat.setVisitorInfo({
-      name: this.refs.name.value,
+      display_name: this.refs.name.value,
       email: this.refs.email.value
     }, (err) => {
       if (err) return;
