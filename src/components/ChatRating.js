@@ -12,7 +12,7 @@ class ChatRating extends Component {
   render() {
       return (
         <CardContainer title="Chat Rating" addClass="chat-rating-card">
-          {this.props.agent.display_name} has requested you to rate the chat service.
+          {this.props.agent} has requested you to rate the chat service.
           <div className="buttons-container">
             <ActionButton
               addClass="button button-rate-down"
