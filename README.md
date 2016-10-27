@@ -1,8 +1,8 @@
 ⚠️ Use of this software is subject to important terms and conditions as set forth in the License file ⚠️
 
-# Zopim Web SDK Sample App
+# Zendesk Chat Web SDK Sample App
 
-This sample app demonstrates how to build a simple chat widget using the [Zopim Web SDK](https://api.zopim.com/web-sdk).
+This sample app demonstrates how to build a simple chat widget using the [Zendesk Chat Web SDK](https://api.zopim.com/web-sdk).
 
 The sample app is built using the [React](https://facebook.github.io/react/) framework and [Redux](http://redux.js.org/) architecture. However, you are free to use any other JavaScript framework to develop your own chat widget.
 
@@ -35,7 +35,7 @@ npm start
 This would open your browser pointing at [127.0.0.1:8000](http://127.0.0.1:8000).
 
 ### Configuration
-To set your Zopim account key, navigate to the configuration file at [`src/config/base.js`](src/config/base.js).
+To set your Zendesk Chat account key, navigate to the configuration file at [`src/config/base.js`](src/config/base.js).
 
 Modify the content of the file as follows:
 ```javascript
