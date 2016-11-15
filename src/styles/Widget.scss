@@ -108,6 +108,10 @@ svg {
     &:not(.visible) {
         display: none;
     }
+    &.drag-drop-zone {
+        outline: 3px dashed grey;
+        outline-offset: -3px;
+    }
 }
 
 .input-form {

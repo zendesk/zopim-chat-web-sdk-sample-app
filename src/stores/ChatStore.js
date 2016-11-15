@@ -161,6 +161,19 @@ function storeHandler(state = DEFAULT_STATE, action) {
 					}
 				};
 				break;
+			case 'visitor_send_file':
+				new_action = {
+					type: 'chat',
+					detail: {
+						type: 'chat.file',
+						display_name: state.visitor.display_name,
+						nick: state.visitor.nick || 'visitor:',
+						timestamp: Date.now(),
+						attachment: action.detail.attachment,
+						source: 'local'
+					}
+				}
+				break;
 			default:
 				new_action = action;
 		}
