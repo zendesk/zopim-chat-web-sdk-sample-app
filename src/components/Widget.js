@@ -36,6 +36,7 @@ class App extends Component {
     this.stopTyping = debounce(this.stopTyping.bind(this), 1000);
     this.setVisible = this.setVisible.bind(this);
     this.setTheme = this.setTheme.bind(this);
+    this.handleFileUpload = this.handleFileUpload.bind(this);
   }
 
   componentDidMount() {
@@ -116,6 +117,39 @@ class App extends Component {
       }
     });
     this.refs.input.getRawInput().value = '';
+  }
+
+  handleFileUpload(event) {
+    event.preventDefault();
+
+    // Don't allow visitor to send file if offline
+    if (this.isOffline()) return;
+
+    // Only send the first file dropped on input
+    const file = event.dataTransfer.files[0];
+
+    // Generate attachment object for local echo
+    const attachment = {
+      mime_type: file.type,
+      name: file.name,
+      size: file.size,
+      url: window.URL.createObjectURL(file)
+    }
+
+    zChat.sendFile(file, (err) => {
+      if (err) {
+        log('Error occured >>>', err);
+        return;
+      }
+    });
+
+    this.props.dispatch({
+      type: 'synthetic',
+      detail: {
+        type: 'visitor_send_file',
+        attachment
+      }
+    });
   }
 
   getVisibilityClass() {
@@ -234,6 +268,7 @@ class App extends Component {
             onSubmit={this.handleOnSubmit}
             onChange={this.handleOnChange}
             onFocus={this.inputOnFocus}
+            onFileUpload={this.handleFileUpload}
           />
         </div>
         <ChatButton addClass={this.getVisibilityClass()} onClick={this.chatButtonOnClick} />
