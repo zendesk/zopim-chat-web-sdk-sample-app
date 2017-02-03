@@ -11,7 +11,7 @@ import { log, get, set } from 'utils';
 import { debounce } from 'lodash';
 import zChat from 'vendor/web-sdk';
 
-const { ENV, ACCOUNT_KEY } = config;
+const { ENV, ACCOUNT_KEY, THEME } = config;
 
 if (ENV === 'dev') {
   window.zChat = zChat;
@@ -21,7 +21,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      theme: 'docked',
+      theme: THEME,
       typing: false,
       visible: false
     };
@@ -69,8 +69,8 @@ class App extends Component {
     }
 
     this.setState({
-      visible: get('visible'),
-      theme: get('theme')
+      visible: get('visible') || this.state.visible,
+      theme: get('theme') || this.state.theme
     });
   }
 
@@ -209,7 +209,7 @@ class App extends Component {
   }
 
   onThemeChange(theme) {
-    if (theme !== 'docked' && theme !== 'widget') {
+    if (theme !== 'docked' && theme !== 'normal') {
       theme = 'docked';
     }
 
@@ -217,7 +217,7 @@ class App extends Component {
   }
 
   getTheme() {
-    return this.state.theme || 'docked';
+    return this.state.theme;
   }
 
   isOffline() {
