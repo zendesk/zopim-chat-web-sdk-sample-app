@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "collections": "^5.0.4",
+    "collections": "^2.0.3",
     "lodash": "^4.15.0",
     "react": "^15.3.0",
     "react-addons-css-transition-group": "^15.3.1",
