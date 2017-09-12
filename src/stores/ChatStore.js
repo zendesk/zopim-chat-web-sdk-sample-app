@@ -71,7 +71,7 @@ function update(state = DEFAULT_STATE, action) {
 
 					// Concat this event to chats to be displayed
 					new_state.chats = state.chats.concat({
-						[Date.now()]: {
+						[action.detail.timestamp]: {
 							...action.detail
 						}
 					});
@@ -84,7 +84,7 @@ function update(state = DEFAULT_STATE, action) {
 
 					// Concat this event to chats to be displayed
 					new_state.chats = state.chats.concat({
-						[Date.now()]: {
+						[action.detail.timestamp]: {
 							...action.detail
 						}
 					});
@@ -95,7 +95,7 @@ function update(state = DEFAULT_STATE, action) {
 				case 'chat.request.rating':
 				case 'chat.msg':
 					new_state.chats = state.chats.concat({
-						[Date.now()]: {
+						[action.detail.timestamp]: {
 							...action.detail,
 							...member(state, action.detail)
 						}
