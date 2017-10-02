@@ -5,7 +5,7 @@ import SortedMap from 'collections/sorted-map';
 const DEFAULT_STATE = {
 	connection: 'closed',
 	account_status: 'offline',
-	departments: [],
+	departments: {},
 	visitor: {},
 	agents: {},
 	chats: SortedMap(),
@@ -31,7 +31,10 @@ function update(state = DEFAULT_STATE, action) {
 		case 'department_update':
 			return {
 				...state,
-				departments: action.detail
+				departments: {
+					...state.departments,
+					[action.detail.id]: action.detail
+				}
 			};
 		case 'visitor_update':
 			return {
