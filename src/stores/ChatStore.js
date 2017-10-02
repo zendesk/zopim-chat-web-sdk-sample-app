@@ -192,6 +192,6 @@ function storeHandler(state = DEFAULT_STATE, action) {
 // Create a Redux store holding the state of your app.
 // Its API is { subscribe, dispatch, getState }.
 // let ChatStore = createStore(update, applyMiddleware(chatMiddleware));
-let ChatStore = createStore(storeHandler, window.devToolsExtension && window.devToolsExtension());
+let ChatStore = createStore(storeHandler, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default ChatStore;
