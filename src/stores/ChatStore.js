@@ -5,7 +5,7 @@ import SortedMap from 'collections/sorted-map';
 const DEFAULT_STATE = {
 	connection: 'closed',
 	account_status: 'offline',
-	departments: [],
+	departments: {},
 	visitor: {},
 	agents: {},
 	chats: SortedMap(),
@@ -31,7 +31,10 @@ function update(state = DEFAULT_STATE, action) {
 		case 'department_update':
 			return {
 				...state,
-				departments: action.detail
+				departments: {
+					...state.departments,
+					[action.detail.id]: action.detail
+				}
 			};
 		case 'visitor_update':
 			return {
@@ -189,6 +192,6 @@ function storeHandler(state = DEFAULT_STATE, action) {
 // Create a Redux store holding the state of your app.
 // Its API is { subscribe, dispatch, getState }.
 // let ChatStore = createStore(update, applyMiddleware(chatMiddleware));
-let ChatStore = createStore(storeHandler, window.devToolsExtension && window.devToolsExtension());
+let ChatStore = createStore(storeHandler, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default ChatStore;
