@@ -130,7 +130,6 @@ class MessageList extends Component {
       <div className="message-list-container">
         <div>{this.renderAll(this.props.isOffline, this.props.messages)}</div>
         {this.renderTyping(this.props.agents)}
-        <div className="scrollbar" />
       </div>
     );
   }
