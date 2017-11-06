@@ -9,6 +9,7 @@ const DEFAULT_STATE = {
 	visitor: {},
 	agents: {},
 	chats: SortedMap(),
+	last_timestamp: 0,
 	is_chatting: false
 };
 
@@ -23,6 +24,10 @@ function isTrigger(nick) {
 // IMPT: Need to return on every case
 function update(state = DEFAULT_STATE, action) {
 	log('action', action);
+
+	if (action.detail && action.detail.timestamp)
+		state.last_timestamp = action.detail.timestamp;
+
 	switch (action.type) {
 		case 'connection_update':
 			return {
@@ -147,10 +152,10 @@ function member(state, detail) {
 		display_name = detail.display_name;
 	if (isAgent(nick)) {
 		const trigger_agent = {
-	      nick: nick,
-	      display_name: display_name,
-	      avatar_path: ''
-	    };
+			nick: nick,
+			display_name: display_name,
+			avatar_path: ''
+		};
 		return {
 			...(state.agents[nick] ? state.agents[nick] : trigger_agent),
 			member_type: 'agent'
@@ -167,6 +172,15 @@ function storeHandler(state = DEFAULT_STATE, action) {
 	let result, new_action = {};
 	if (action.type === 'synthetic') {
 		log('synthetic action', action);
+
+		/**
+		 * Use last message timestamp for user-sent messages
+		 * instead of new Date() since there might be huge skew
+		 * between user's local computer and the server, which can
+		 * cause messages to appear in the wrong order.
+		 */
+		const new_timestamp = state.last_timestamp + 1;
+
 		switch (action.detail.type) {
 			case 'visitor_send_msg':
 				new_action = {
@@ -175,7 +189,7 @@ function storeHandler(state = DEFAULT_STATE, action) {
 						type: 'chat.msg',
 						display_name: state.visitor.display_name,
 						nick: state.visitor.nick || 'visitor:',
-						timestamp: Date.now(),
+						timestamp: new_timestamp,
 						msg: action.detail.msg,
 						source: 'local'
 					}
@@ -188,7 +202,7 @@ function storeHandler(state = DEFAULT_STATE, action) {
 						type: 'chat.file',
 						display_name: state.visitor.display_name,
 						nick: state.visitor.nick || 'visitor:',
-						timestamp: Date.now(),
+						timestamp: new_timestamp,
 						attachment: action.detail.attachment,
 						source: 'local'
 					}
