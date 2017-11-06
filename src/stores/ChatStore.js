@@ -12,7 +12,13 @@ const DEFAULT_STATE = {
 	is_chatting: false
 };
 
-let isAgent = (nick) => { return nick.startsWith('agent:') };
+function isAgent(nick){
+	return nick.startsWith('agent:');
+}
+
+function isTrigger(nick) {
+	return nick.startsWith('agent:trigger');
+}
 
 // IMPT: Need to return on every case
 function update(state = DEFAULT_STATE, action) {
@@ -97,6 +103,9 @@ function update(state = DEFAULT_STATE, action) {
 				case 'chat.wait_queue':
 				case 'chat.request.rating':
 				case 'chat.msg':
+					// Ensure that triggers are uniquely identified by their display names
+					if (isTrigger(action.detail.nick))
+						action.detail.nick = `agent:trigger:${action.detail.display_name}`;
 					new_state.chats = state.chats.concat({
 						[action.detail.timestamp]: {
 							...action.detail,
@@ -105,12 +114,20 @@ function update(state = DEFAULT_STATE, action) {
 					});
 					return new_state;
 				case 'typing':
+					let agent = state.agents[action.detail.nick];
+					// Ensure that triggers are uniquely identified by their display names
+					if (isTrigger(action.detail.nick)) {
+						agent = {
+							nick: `agent:trigger:${action.detail.display_name}`,
+							display_name: action.detail.display_name
+						};
+					}
 					return {
 						...state,
 						agents: {
 							...state.agents,
-							[action.detail.nick]: {
-								...state.agents[action.detail.nick],
+							[agent.nick]: {
+								...agent,
 								typing: action.detail.typing
 							}
 						}
