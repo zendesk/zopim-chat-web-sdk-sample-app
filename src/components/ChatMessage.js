@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Avatar from 'components/Avatar';
 import ChatMedia from 'components/ChatMedia';
-import { log, mapMessageToEntity } from 'utils';
+import { log } from 'utils';
 import zChat from 'vendor/web-sdk';
 
 class ChatMessage extends Component {
@@ -70,7 +70,7 @@ class ChatMessage extends Component {
     return (
       <div className={`chat-msg-container ${this.getClassName(this.props.message)} ${this.props.addClass}`}>
         <div className="avatar-container">
-          <Avatar entity={mapMessageToEntity(this.props.message)} />
+          <Avatar entity={this.props.agent} />
         </div>
         <div className="chat-msg-wrapper">
           {this.renderMessagePart(this.props.message)}
@@ -83,6 +83,7 @@ class ChatMessage extends Component {
 ChatMessage.displayName = 'ChatMessage';
 ChatMessage.propTypes = {
   message: React.PropTypes.object,
+  agent: React.PropTypes.object,
   addClass: React.PropTypes.string
 };
 ChatMessage.defaultProps = {

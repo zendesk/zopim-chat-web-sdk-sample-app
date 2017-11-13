@@ -1,4 +1,4 @@
-import { log } from 'utils';
+import { log, isAgent, isTrigger } from 'utils';
 import { createStore } from 'redux';
 import SortedMap from 'collections/sorted-map';
 
@@ -12,14 +12,6 @@ const DEFAULT_STATE = {
 	last_timestamp: 0,
 	is_chatting: false
 };
-
-function isAgent(nick){
-	return nick.startsWith('agent:');
-}
-
-function isTrigger(nick) {
-	return nick.startsWith('agent:trigger');
-}
 
 // IMPT: Need to return on every case
 function update(state = DEFAULT_STATE, action) {
@@ -114,7 +106,7 @@ function update(state = DEFAULT_STATE, action) {
 					new_state.chats = state.chats.concat({
 						[action.detail.timestamp]: {
 							...action.detail,
-							...member(state, action.detail)
+							member_type: isAgent(action.detail.nick) ? 'agent' : 'visitor'
 						}
 					});
 					return new_state;
@@ -143,28 +135,6 @@ function update(state = DEFAULT_STATE, action) {
 		default:
 			log('unhandled action', action);
 			return state;
-	}
-}
-
-function member(state, detail) {
-	const
-		nick = detail.nick,
-		display_name = detail.display_name;
-	if (isAgent(nick)) {
-		const trigger_agent = {
-			nick: nick,
-			display_name: display_name,
-			avatar_path: ''
-		};
-		return {
-			...(state.agents[nick] ? state.agents[nick] : trigger_agent),
-			member_type: 'agent'
-		}
-	} else {
-		return {
-			...state.visitor,
-			member_type: 'visitor'
-		}
 	}
 }
 

@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { isAgent } from 'utils';
 
 class Avatar extends Component {
   getVisitorSvg() {
@@ -14,19 +15,15 @@ class Avatar extends Component {
   renderAvatar(entity) {
     const style = {};
     let child;
-    if (entity.nick.startsWith('agent:')) {
-      if (entity.avatar_path) {
-        style.backgroundImage = `url('${entity.avatar_path}')`;
-        style.backgroundColor = 'none';
-      } else {
-        child = this.getVisitorSvg();
-      }
+    if (entity && isAgent(entity.nick) && entity.avatar_path) {
+      style.backgroundImage = `url('${entity.avatar_path}')`;
+      style.backgroundColor = 'none';
     } else {
       child = this.getVisitorSvg();
     }
 
     return (
-      <div className="avatar" style={style} title={entity.display_name}>
+      <div className="avatar" style={style} title={entity ? entity.display_name : 'Agent'}>
         {child}
       </div>
     );
