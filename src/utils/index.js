@@ -1,18 +1,18 @@
 import config from 'config';
 const { ENV } = config;
 
-export function mapMessageToEntity(msg) {
-	return {
-		nick: msg.nick,
-		display_name: msg.display_name,
-		avatar_path: msg.avatar_path
-	}
-}
-
 export function log() {
 	if (ENV === 'dev') {
 		console.log.apply(console, arguments); // eslint-disable-line no-console
 	}
+}
+
+export function isAgent(nick){
+	return nick.startsWith('agent:');
+}
+
+export function isTrigger(nick) {
+	return nick.startsWith('agent:trigger');
 }
 
 export * from'./PersistentStorage';

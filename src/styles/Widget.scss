@@ -175,7 +175,7 @@ svg {
 .message-list-container {
     flex-grow: 1;
     flex-shrink: 1;
-    padding: 16px 5px 0 20px;
+    padding: 16px 16px 0 20px;
     overflow-y: scroll;
 }
 
@@ -189,7 +189,7 @@ svg {
     &.visitor {
         align-items: flex-end;
         width: 100%;
-        text-align: right;
+        text-align: left;
     }
 
     &.agent {
@@ -209,6 +209,8 @@ svg {
     display: inline-block;
     margin-left: 40px;
     margin-right: 40px;
+    max-width: 250px;
+    word-wrap: break-word;
 }
 
 .chat-msg {
@@ -477,15 +479,6 @@ svg {
     display: inline-block;
     color: #555;
     animation: typing-animation 1.5s infinite ease-in-out;
-}
-
-.scrollbar {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 20px;
-    background: white;
 }
 
 @keyframes widget-show {

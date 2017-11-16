@@ -14,7 +14,6 @@ class MessageList extends Component {
     super(props);
     this.renderTyping = this.renderTyping.bind(this);
     this.renderByType = this.renderByType.bind(this);
-    this.getAgentAvatarPath = this.getAgentAvatarPath.bind(this);
   }
 
   componentDidUpdate() {
@@ -30,10 +29,6 @@ class MessageList extends Component {
     }
   }
 
-  getAgentAvatarPath(nick) {
-    return this.isAgent(nick) ? this.props.agents[nick].avatar_path : '';
-  }
-
   renderByType(msg, addClass) {
     switch (msg.type) {
       case 'chat.file':
@@ -43,6 +38,7 @@ class MessageList extends Component {
             key={msg.type + msg.timestamp}
             message={msg}
             addClass={addClass}
+            agent={this.props.agents[msg.nick]}
           />
         );
       case 'chat.memberjoin':
@@ -130,7 +126,6 @@ class MessageList extends Component {
       <div className="message-list-container">
         <div>{this.renderAll(this.props.isOffline, this.props.messages)}</div>
         {this.renderTyping(this.props.agents)}
-        <div className="scrollbar" />
       </div>
     );
   }
