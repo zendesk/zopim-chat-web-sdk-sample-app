@@ -52,6 +52,10 @@ At the end of the compilation, you can find the widget at `dist/assets/widget.js
 ```html
 <script type="text/javascript" src="/path/to/widget.js"></script>
 ```
+## Testing locally 
+If you are using `localhost` to test the sample code, you will get visitor session disconnections on page change or refresh. This is due to `localhost` storing but not persisting the visitor cookie. Each page change will cause the visitor to re-register with a new cookie value. 
+
+To get around this, use the IP address of the machine (ex. `https://127.0.0.1`) or assign a local domain name.
 
 ## Contributions
 Pull requests are welcome.
