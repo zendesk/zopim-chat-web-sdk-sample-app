@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
-import React, { Component } from 'react';
-import ChatImage from 'components/ChatImage';
+import React, { Component } from 'react'
+import ChatImage from 'components/ChatImage'
 
 class ChatMedia extends Component {
   constructor(props) {
-    super(props);
-    this.renderMediaByType = this.renderMediaByType.bind(this);
+    super(props)
+    this.renderMediaByType = this.renderMediaByType.bind(this)
   }
 
   renderMediaByType(message) {
     switch (true) {
       case /^image/.test(message.attachment.mime_type):
-        return <ChatImage message={message} />;
+        return <ChatImage message={message} />
       default:
         return (
           <a href={this.props.message.attachment.url} target="_blank">
@@ -20,7 +20,7 @@ class ChatMedia extends Component {
               ⬇️ Download {this.props.message.attachment.name}
             </div>
           </a>
-        );
+        )
     }
   }
 
@@ -29,13 +29,13 @@ class ChatMedia extends Component {
       <div className="chat-media-container">
         {this.renderMediaByType(this.props.message)}
       </div>
-    );
+    )
   }
 }
 
-ChatMedia.displayName = 'ChatMedia';
+ChatMedia.displayName = 'ChatMedia'
 ChatMedia.propTypes = {
   message: React.PropTypes.object
-};
+}
 
-export default ChatMedia;
+export default ChatMedia

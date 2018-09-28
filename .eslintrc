@@ -1,7 +1,8 @@
 {
   "parser": "babel-eslint",
   "plugins": [
-    "react"
+    "react",
+    "prettier"
   ],
   "parserOptions": {
     "ecmaVersion": 6,
@@ -18,6 +19,7 @@
     "mocha": true
   },
   "rules": {
+    "prettier/prettier": ["error", { "singleQuote": true , "semi": false, "trailingComma": "none" }],
     "comma-dangle": 1,
     "quotes": [ 1, "single" ],
     "no-undef": 1,

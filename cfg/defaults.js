@@ -1,16 +1,18 @@
-'use strict';
-const path = require('path');
-const autoprefixer = require('autoprefixer');
-const srcPath = path.join(__dirname, '/../src');
-const vendorPath = path.join(__dirname, '/../vendor');
-const dfltPort = 8000;
+'use strict'
+const path = require('path')
+const autoprefixer = require('autoprefixer')
+const srcPath = path.join(__dirname, '/../src')
+const vendorPath = path.join(__dirname, '/../vendor')
+const dfltPort = 8000
 function getDefaultModules() {
   return {
-    preLoaders: [{
+    preLoaders: [
+      {
         test: /\.(js|jsx)$/,
         include: srcPath,
         loader: 'eslint-loader'
-      }],
+      }
+    ],
     loaders: [
       {
         test: /\.css$/,
@@ -18,11 +20,13 @@ function getDefaultModules() {
       },
       {
         test: /\.sass/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+        loader:
+          'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax'
       },
       {
         test: /\.scss/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded'
+        loader:
+          'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded'
       },
       {
         test: /\.less/,
@@ -41,7 +45,7 @@ function getDefaultModules() {
         loader: 'file-loader'
       }
     ]
-  };
+  }
 }
 module.exports = {
   srcPath: srcPath,
@@ -49,7 +53,7 @@ module.exports = {
   publicPath: '/assets/',
   port: dfltPort,
   getDefaultModules: getDefaultModules,
-  postcss: function () {
-    return [ autoprefixer({ browsers: ['last 5 versions', 'ie 6-11']  }) ];
+  postcss: function() {
+    return [autoprefixer({ browsers: ['last 5 versions', 'ie 6-11'] })]
   }
-};
+}
