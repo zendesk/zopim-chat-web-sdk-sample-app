@@ -10,13 +10,13 @@ class SystemMessage extends Component {
   getMessageByType(msg) {
     switch (msg.type) {
       case 'chat.memberjoin':
-        return `${this.props.message.display_name} has joined the chat`
+        return `${this.props.message.display_name} è entrato nella chat`
       case 'chat.memberleave':
-        return `${this.props.message.display_name} has left the chat`
+        return `${this.props.message.display_name} è uscito dalla chat`
       case 'chat.wait_queue':
-        return `Please wait. There are currently ${
-          msg.wait_queue
-        } people(s) in the queue.`
+        return `Attendere prego. Attualmente ${
+          msg.wait_queue > 1 ? 'ci sono' : "c'è"
+        } ${msg.wait_queue} person${msg.wait_queue > 1 ? 'e' : 'a'} in coda.`
       default:
         return JSON.stringify(msg)
     }

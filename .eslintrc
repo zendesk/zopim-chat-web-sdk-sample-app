@@ -21,7 +21,7 @@
   "rules": {
     "prettier/prettier": ["error", { "singleQuote": true , "semi": false, "trailingComma": "none" }],
     "comma-dangle": 1,
-    "quotes": [ 1, "single" ],
+    // "quotes": [ 1, "single" ],
     "no-undef": 1,
     "global-strict": 0,
     "no-extra-semi": 1,
