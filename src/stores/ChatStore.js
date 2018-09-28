@@ -84,9 +84,9 @@ function update(state = DEFAULT_STATE, action) {
 
           return new_state
         case 'chat.memberleave':
-          // if (!isAgent(action.detail.nick)) {
-          new_state.is_chatting = false
-          // }
+          if (!isAgent(action.detail.nick)) {
+            new_state.is_chatting = false
+          }
 
           // Concat this event to chats to be displayed
           new_state.chats = state.chats.concat({
