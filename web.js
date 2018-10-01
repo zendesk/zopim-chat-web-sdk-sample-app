@@ -13,7 +13,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './dist/index.html'))
 })
 
-const port = 8080
+const port = 80
 
 app.listen(port, err => {
   if (err) console.log(chalk.red(err))
