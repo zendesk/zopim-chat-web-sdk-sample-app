@@ -1,1 +1,1 @@
-web: node web.js
+web: npm run dist && node web.js
