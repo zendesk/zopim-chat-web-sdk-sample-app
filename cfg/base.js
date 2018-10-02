@@ -1,7 +1,6 @@
 'use strict'
 let path = require('path')
 let defaultSettings = require('./defaults')
-const webpack = require('webpack')
 
 // Additional npm or bower modules to include in builds
 // Add all foreign plugins you may need into this array
@@ -43,13 +42,5 @@ module.exports = {
       React: __dirname + '/../node_modules/react'
     }
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        ACCOUNT_KEY: JSON.stringify(process.env.ACCOUNT_KEY),
-        BOT_ACCOUNT_KEY: JSON.stringify(process.env.BOT_ACCOUNT_KEY)
-      }
-    })
-  ],
   module: {}
 }
