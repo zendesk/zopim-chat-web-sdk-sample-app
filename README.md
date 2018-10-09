@@ -1,5 +1,6 @@
 ⚠️ Use of this software is subject to important terms and conditions as set forth in the License file ⚠️
 
+
 # Zendesk Chat Web SDK Sample App
 
 This sample app demonstrates how to build a simple chat widget using the [Zendesk Chat Web SDK](https://api.zopim.com/web-sdk).
