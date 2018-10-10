@@ -61,8 +61,6 @@ class App extends Component {
       account_key: ACCOUNT_KEY
     })
 
-    this.getServicesStatus()
-
     const events = [
       'account_status',
       'connection_update',
@@ -75,6 +73,10 @@ class App extends Component {
 
     events.forEach(evt => {
       zChat.on(evt, data => {
+        if (evt === 'connection_update' && data === 'connected') {
+          this.getServicesStatus()
+        }
+
         this.props.dispatch({
           type: evt,
           detail: data
@@ -294,6 +296,10 @@ class App extends Component {
         const chatOperatorSettings = json.hypeNoAuthServiceList.filter(
           x => x.service === 'CHAT'
         )
+
+        const zChatOperatorSettings = zChat.getOperatingHours()
+
+        log(zChatOperatorSettings)
 
         const keywords = chatOperatorSettings
           .reduce(
