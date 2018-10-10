@@ -61,7 +61,7 @@ function update(state = DEFAULT_STATE, action) {
         }
       }
     case 'chat':
-      let new_state = { ...state }
+      const new_state = { ...state }
       switch (action.detail.type) {
         /* Web SDK events */
         case 'chat.memberjoin':
@@ -196,7 +196,7 @@ function storeHandler(state = DEFAULT_STATE, action) {
 // Create a Redux store holding the state of your app.
 // Its API is { subscribe, dispatch, getState }.
 // let ChatStore = createStore(update, applyMiddleware(chatMiddleware));
-let ChatStore = createStore(
+const ChatStore = createStore(
   storeHandler,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )

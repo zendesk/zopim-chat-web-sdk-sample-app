@@ -109,9 +109,9 @@ class MessageList extends Component {
     let prev = null
 
     return messages.map(message => {
-      let addClass = '',
-        currentNick = message.nick,
-        prevNick = prev && prev.nick
+      let addClass = ''
+      const currentNick = message.nick
+      const prevNick = prev && prev.nick
 
       if (
         prev &&

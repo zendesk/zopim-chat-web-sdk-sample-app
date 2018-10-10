@@ -293,13 +293,31 @@ class App extends Component {
           x => x.service === 'CHATBOT'
         )
 
-        const chatOperatorSettings = json.hypeNoAuthServiceList.filter(
+        const chatOperatorSettingTemplate = json.hypeNoAuthServiceList.find(
           x => x.service === 'CHAT'
         )
 
         const zChatOperatorSettings = zChat.getOperatingHours()
 
-        log(zChatOperatorSettings)
+        const chatOperatorSettings = Object.keys(
+          zChatOperatorSettings.department_schedule
+        ).map(k => {
+          const startT = new Date()
+          const endT = new Date()
+
+          const currDaySettings =
+            zChatOperatorSettings.department_schedule[k][startT.getDay()]
+
+          startT.setHours(0, currDaySettings[0].start, 0, 0)
+          endT.setHours(0, currDaySettings[0].end, 0, 0)
+
+          return {
+            ...chatOperatorSettingTemplate,
+            startTime: startT.toLocaleTimeString().replace(/\:\d\d$/, ''),
+            endTime: endT.toLocaleTimeString().replace(/\:\d\d$/, ''),
+            status: zChatOperatorSettings.enabled ? 'ACTIVE' : 'INACTIVE'
+          }
+        })
 
         const keywords = chatOperatorSettings
           .reduce(
