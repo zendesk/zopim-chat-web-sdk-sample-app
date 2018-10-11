@@ -1,15 +1,15 @@
 'use strict'
 
-let path = require('path')
-let webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
 
-let baseConfig = require('./base')
-let defaultSettings = require('./defaults')
+const baseConfig = require('./base')
+const defaultSettings = require('./defaults')
 
 // Add needed plugins here
-let BowerWebpackPlugin = require('bower-webpack-plugin')
+const BowerWebpackPlugin = require('bower-webpack-plugin')
 
-let config = Object.assign({}, baseConfig, {
+const config = Object.assign({}, baseConfig, {
   entry: path.join(__dirname, '../src/index'),
   cache: false,
   devtool: 'sourcemap',

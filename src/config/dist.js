@@ -2,7 +2,7 @@
 
 import baseConfig from './base'
 
-let config = {
+const config = {
   ENV: 'dist'
 }
 
