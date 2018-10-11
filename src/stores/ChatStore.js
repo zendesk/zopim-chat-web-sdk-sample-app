@@ -99,6 +99,7 @@ function update(state = DEFAULT_STATE, action) {
         case 'chat.file':
         case 'chat.wait_queue':
         case 'chat.request.rating':
+        case 'chat.rating':
         case 'chat.msg':
         case 'offline':
         case 'prechat':

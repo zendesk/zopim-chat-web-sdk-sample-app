@@ -2,18 +2,18 @@
 
 import React, { Component } from 'react'
 import CardContainer from 'components/CardContainer'
-import ActionButton from 'components/ActionButton'
+// import ActionButton from 'components/ActionButton'
 import zChat from 'vendor/web-sdk'
 import { log } from 'utils'
 
-class ChatRating extends Component {
+class ChatRatingResult extends Component {
   constructor(props) {
     super(props)
   }
 
   rateDown(event) {
     event.preventDefault()
-    zChat.sendChatRating('bad', err => {
+    zChat.sendChatRatingResult('bad', err => {
       if (err) {
         log('Error occured >>>', err)
         return
@@ -23,7 +23,7 @@ class ChatRating extends Component {
 
   rateUp(event) {
     event.preventDefault()
-    zChat.sendChatRating('good', err => {
+    zChat.sendChatRatingResult('good', err => {
       if (err) {
         log('Error occured >>>', err)
         return
@@ -34,9 +34,9 @@ class ChatRating extends Component {
   render() {
     return (
       <CardContainer title="Valutazione Chat" addClass="chat-rating-card">
-        {this.props.agent.display_name} ha richiesto una valutazione per questa
-        chat.
-        <div className="buttons-container">
+        Grazie per il feedback!{' '}
+        {this.props.agent.rating === 'good' ? '👍' : '👎'}
+        {/*<div className="buttons-container">
           <ActionButton
             addClass="button button-rate-down"
             label="👎"
@@ -47,16 +47,16 @@ class ChatRating extends Component {
             label="👍"
             onClick={this.rateUp}
           />
-        </div>
+        </div>*/}
       </CardContainer>
     )
   }
 }
 
-ChatRating.displayName = 'ChatRating'
-ChatRating.propTypes = {
+ChatRatingResult.displayName = 'ChatRatingResult'
+ChatRatingResult.propTypes = {
   agent: React.PropTypes.object
 }
-ChatRating.defaultProps = {}
+ChatRatingResult.defaultProps = {}
 
-export default ChatRating
+export default ChatRatingResult

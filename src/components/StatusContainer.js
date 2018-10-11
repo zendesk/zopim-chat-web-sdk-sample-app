@@ -16,11 +16,12 @@ class StatusContainer extends Component {
   getStatusText(status) {
     switch (status) {
       case 'online':
-        return 'Siamo online!'
+      // return 'Siamo online!'
       case 'offline':
-        return 'Lasciaci un messaggio'
+      // return 'Lasciaci un messaggio'
       case 'away':
-        return 'Nessun operatore online'
+        // return 'Nessun operatore online'
+        return 'Aiuto e Supporto'
       default:
         return 'Connessione...'
     }

@@ -1,4 +1,4 @@
-require('styles/Widget.scss')
+import 'styles/Widget.scss'
 
 import config from 'config'
 import React, { Component } from 'react'
@@ -73,10 +73,6 @@ class App extends Component {
 
     events.forEach(evt => {
       zChat.on(evt, data => {
-        if (evt === 'connection_update' && data === 'connected') {
-          this.getServicesStatus()
-        }
-
         this.props.dispatch({
           type: evt,
           detail: data
@@ -93,6 +89,15 @@ class App extends Component {
       visible: get('visible') || this.state.visible,
       theme: get('theme') || this.state.theme
     })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      !this.props.account_status !== !!nextProps.account_status &&
+      nextProps.account_status === 'online'
+    ) {
+      this.getServicesStatus()
+    }
   }
 
   handleOnChange() {

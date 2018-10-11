@@ -8,6 +8,7 @@ import Avatar from 'components/Avatar'
 import OfflineForm from 'components/OfflineForm'
 import PrechatForm from 'components/PrechatForm'
 import ChatRating from 'components/ChatRating'
+import ChatRatingResult from 'components/ChatRatingResult'
 
 class MessageList extends Component {
   constructor(props) {
@@ -46,12 +47,14 @@ class MessageList extends Component {
       case 'chat.wait_queue':
       case 'typing':
         return <SystemMessage key={msg.type + msg.timestamp} message={msg} />
+      case 'chat.request.rating':
+        return <ChatRating agent={msg} key={msg.type + msg.timestamp} />
       case 'chat.rating':
-        return <ChatRating key={msg.type + msg.timestamp} />
+        return <ChatRatingResult agent={msg} key={msg.type + msg.timestamp} />
       case 'offline':
-        return <OfflineForm title={msg.msg} key={`offline-${msg.timestamp}`} />
+        return <OfflineForm title={msg.msg} key={msg.type + msg.timestamp} />
       case 'prechat':
-        return <PrechatForm title={msg.msg} key={`prechat-${msg.timestamp}`} />
+        return <PrechatForm title={msg.msg} key={msg.type + msg.timestamp} />
       default:
         return (
           <div key={+new Date()}>Unhandled message: {JSON.stringify(msg)}</div>
