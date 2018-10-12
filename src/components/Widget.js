@@ -549,7 +549,7 @@ class App extends Component {
       this.props.data.visitor,
       this.props.data.agents
     )
-    const isOffline = this.isOffline()
+    // const isOffline = this.isOffline()
 
     return (
       <div className="index">
@@ -562,7 +562,8 @@ class App extends Component {
           />
           <MessageList
             isChatting={this.props.data.is_chatting}
-            isOffline={isOffline}
+            // isOffline={isOffline}
+            isOffline={false}
             messages={this.props.data && this.props.data.chats.toArray()}
             agents={this.props.data.agents}
             entities={entities}
