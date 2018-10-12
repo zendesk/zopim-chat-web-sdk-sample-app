@@ -93,8 +93,9 @@ class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (
-      !this.props.data.account_status !== !!nextProps.data.account_status &&
-      nextProps.data.account_status === 'online'
+      !this.props.data.chatOperatorSettings &&
+      this.props.data.connection !== 'connected' &&
+      nextProps.data.connection === 'connected'
     ) {
       this.getServicesStatus()
     }
