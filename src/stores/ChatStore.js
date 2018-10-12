@@ -10,7 +10,14 @@ const DEFAULT_STATE = {
   agents: {},
   chats: SortedMap(),
   last_timestamp: 0,
-  is_chatting: false
+  is_chatting: false,
+  chatbot: {
+    chatOperatorSettings: null,
+    serverToClientTimeSpan: null,
+    minConfidence: null,
+    keywords: null,
+    active: true
+  }
 }
 
 // IMPT: Need to return on every case
@@ -133,7 +140,11 @@ function update(state = DEFAULT_STATE, action) {
             }
           }
         case 'chat.bot.settings':
-          new_state.chatbot = { ...action.detail, type: undefined }
+          new_state.chatbot = {
+            ...new_state.chatbot,
+            ...action.detail,
+            type: undefined
+          }
           return new_state
         default:
           return state

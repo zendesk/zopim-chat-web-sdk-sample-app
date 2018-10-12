@@ -354,7 +354,7 @@ class App extends Component {
             chatOperatorSettings,
             serverToClientTimeSpan:
               moment(json.serverTime).valueOf() - clientTime.getTime(),
-            // active: this.isServiceActive(chatBotSettings),
+            active: this.isServiceActive(chatBotSettings),
             minConfidence: Number(chatBotSettings.addtInfo),
             keywords
           }
@@ -521,8 +521,9 @@ class App extends Component {
 
   isOffline() {
     return (
-      this.props.data.account_status === 'offline' &&
-      !this.props.data.is_chatting
+      (this.props.data.account_status === 'offline' &&
+        !this.props.data.is_chatting) ||
+      !!this.props.data.chatbot.active
     )
   }
 

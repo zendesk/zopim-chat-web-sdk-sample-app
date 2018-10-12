@@ -33,6 +33,14 @@ class PrechatForm extends Component {
       err => {
         if (err) return
 
+        this.props.dispatch({
+          type: 'chat',
+          detail: {
+            type: 'chat.bot.settings',
+            active: false
+          }
+        })
+
         zChat.sendChatMsg(msg, err => {
           if (err) log('Error sending message')
         })
