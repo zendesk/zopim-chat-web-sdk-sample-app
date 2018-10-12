@@ -93,8 +93,8 @@ class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (
-      !this.props.account_status !== !!nextProps.account_status &&
-      nextProps.account_status === 'online'
+      !this.props.data.account_status !== !!nextProps.data.account_status &&
+      nextProps.data.account_status === 'online'
     ) {
       this.getServicesStatus()
     }
