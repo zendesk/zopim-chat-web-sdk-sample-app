@@ -132,6 +132,9 @@ function update(state = DEFAULT_STATE, action) {
               }
             }
           }
+        case 'chat.bot.settings':
+          new_state.chatbot = { ...action.detail, type: undefined }
+          return new_state
         default:
           return state
       }
