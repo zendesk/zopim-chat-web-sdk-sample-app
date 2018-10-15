@@ -18,6 +18,10 @@ class SystemMessage extends Component {
         return `Attendere prego. Attualmente ${
           msg.wait_queue > 1 ? 'ci sono' : "c'è"
         } ${msg.wait_queue} person${msg.wait_queue > 1 ? 'e' : 'a'} in coda.`
+      case 'chat.rating':
+        return `${this.props.message.display_name} ha valutato la chat ${
+          this.props.message.new_rating === 'good' ? '👍' : '👎'
+        }`
       default:
         return JSON.stringify(msg)
     }

@@ -8,7 +8,6 @@ import Avatar from 'components/Avatar'
 import OfflineForm from 'components/OfflineForm'
 import PrechatForm from 'components/PrechatForm'
 import ChatRating from 'components/ChatRating'
-import ChatRatingResult from 'components/ChatRatingResult'
 import PropTypes from 'prop-types'
 
 class MessageList extends Component {
@@ -46,6 +45,7 @@ class MessageList extends Component {
       case 'chat.memberjoin':
       case 'chat.wait_queue':
       case 'typing':
+      case 'chat.rating':
         return <SystemMessage key={msg.type + msg.timestamp} message={msg} />
       case 'chat.memberleave':
         return (
@@ -56,8 +56,6 @@ class MessageList extends Component {
         )
       case 'chat.request.rating':
         return <ChatRating agent={msg} key={msg.type + msg.timestamp} />
-      case 'chat.rating':
-        return <ChatRatingResult agent={msg} key={msg.type + msg.timestamp} />
       case 'offline':
         return <OfflineForm title={msg.msg} key={msg.type + msg.timestamp} />
       case 'prechat':
