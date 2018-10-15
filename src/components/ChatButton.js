@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class ChatButton extends Component {
   render() {
@@ -23,8 +24,8 @@ class ChatButton extends Component {
 
 ChatButton.displayName = 'ChatButton'
 ChatButton.propTypes = {
-  onClick: React.PropTypes.func,
-  addClass: React.PropTypes.string
+  onClick: PropTypes.func,
+  addClass: PropTypes.string
 }
 
 export default ChatButton

@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { isAgent } from 'utils'
 
 class Avatar extends Component {
@@ -44,7 +45,7 @@ class Avatar extends Component {
 
 Avatar.displayName = 'Avatar'
 Avatar.propTypes = {
-  entity: React.PropTypes.object
+  entity: PropTypes.object
 }
 
 export default Avatar

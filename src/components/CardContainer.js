@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class CardContainer extends Component {
   constructor(props) {
@@ -28,12 +29,9 @@ class CardContainer extends Component {
 
 CardContainer.displayName = 'CardContainer'
 CardContainer.propTypes = {
-  icon: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.element
-  ]),
-  title: React.PropTypes.string,
-  addClass: React.PropTypes.string,
-  contentAddClass: React.PropTypes.string
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  title: PropTypes.string,
+  addClass: PropTypes.string,
+  contentAddClass: PropTypes.string
 }
 export default CardContainer

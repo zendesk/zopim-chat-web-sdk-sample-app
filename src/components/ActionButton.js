@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class ActionButton extends Component {
   render() {
@@ -17,9 +18,9 @@ class ActionButton extends Component {
 
 ActionButton.displayName = 'ActionButton'
 ActionButton.propTypes = {
-  onClick: React.PropTypes.func,
-  label: React.PropTypes.string,
-  addClass: React.PropTypes.string
+  onClick: PropTypes.func,
+  label: PropTypes.string,
+  addClass: PropTypes.string
 }
 
 export default ActionButton

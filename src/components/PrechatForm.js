@@ -7,6 +7,7 @@ import ActionButton from 'components/ActionButton'
 import { log } from 'utils'
 import { connect } from 'react-redux'
 import zChat from 'vendor/web-sdk'
+import PropTypes from 'prop-types'
 
 class PrechatForm extends Component {
   constructor(props) {
@@ -100,9 +101,9 @@ class PrechatForm extends Component {
 
 PrechatForm.displayName = 'PrechatForm'
 PrechatForm.propTypes = {
-  onClick: React.PropTypes.func,
-  addClass: React.PropTypes.string,
-  title: React.PropTypes.string
+  onClick: PropTypes.func,
+  addClass: PropTypes.string,
+  title: PropTypes.string
 }
 
 export default connect()(PrechatForm)

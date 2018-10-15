@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class ChatImage extends Component {
   render() {
@@ -23,7 +24,7 @@ class ChatImage extends Component {
 
 ChatImage.displayName = 'ChatImage'
 ChatImage.propTypes = {
-  message: React.PropTypes.object
+  message: PropTypes.object
 }
 ChatImage.defaultProps = {
   message: {

@@ -2,33 +2,11 @@
 
 import React, { Component } from 'react'
 import CardContainer from 'components/CardContainer'
-// import ActionButton from 'components/ActionButton'
-import zChat from 'vendor/web-sdk'
-import { log } from 'utils'
+import PropTypes from 'prop-types'
 
 class ChatRatingResult extends Component {
   constructor(props) {
     super(props)
-  }
-
-  rateDown(event) {
-    event.preventDefault()
-    zChat.sendChatRatingResult('bad', err => {
-      if (err) {
-        log('Error occured >>>', err)
-        return
-      }
-    })
-  }
-
-  rateUp(event) {
-    event.preventDefault()
-    zChat.sendChatRatingResult('good', err => {
-      if (err) {
-        log('Error occured >>>', err)
-        return
-      }
-    })
   }
 
   render() {
@@ -43,7 +21,7 @@ class ChatRatingResult extends Component {
 
 ChatRatingResult.displayName = 'ChatRatingResult'
 ChatRatingResult.propTypes = {
-  agent: React.PropTypes.object
+  agent: PropTypes.object
 }
 ChatRatingResult.defaultProps = {}
 

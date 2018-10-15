@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class SendButton extends Component {
   constructor(props) {
@@ -27,8 +28,8 @@ class SendButton extends Component {
 
 SendButton.displayName = 'SendButton'
 SendButton.propTypes = {
-  onClick: React.PropTypes.func,
-  addClass: React.PropTypes.string
+  onClick: PropTypes.func,
+  addClass: PropTypes.string
 }
 
 export default SendButton

@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class StatusContainer extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class StatusContainer extends Component {
 
 StatusContainer.displayName = 'StatusContainer'
 StatusContainer.propTypes = {
-  accountStatus: React.PropTypes.string,
-  minimizeOnClick: React.PropTypes.func
+  accountStatus: PropTypes.string,
+  minimizeOnClick: PropTypes.func
 }
 export default StatusContainer

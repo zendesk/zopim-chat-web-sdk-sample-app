@@ -5,6 +5,7 @@ import CardContainer from 'components/CardContainer'
 import ActionButton from 'components/ActionButton'
 import zChat from 'vendor/web-sdk'
 import { log } from 'utils'
+import PropTypes from 'prop-types'
 
 class ChatRating extends Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class ChatRating extends Component {
 
 ChatRating.displayName = 'ChatRating'
 ChatRating.propTypes = {
-  agent: React.PropTypes.object
+  agent: PropTypes.object
 }
 ChatRating.defaultProps = {}
 

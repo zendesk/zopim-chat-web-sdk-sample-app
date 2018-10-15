@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import SendButton from 'components/SendButton'
+import PropTypes from 'prop-types'
 
 class Input extends Component {
   constructor(props) {
@@ -63,11 +64,11 @@ class Input extends Component {
 
 Input.displayName = 'Input'
 Input.propTypes = {
-  addClass: React.PropTypes.string,
-  onSubmit: React.PropTypes.func,
-  onChange: React.PropTypes.func,
-  onFocus: React.PropTypes.func,
-  onFileUpload: React.PropTypes.func
+  addClass: PropTypes.string,
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onFileUpload: PropTypes.func
 }
 
 export default Input

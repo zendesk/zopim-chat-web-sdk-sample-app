@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import ChatImage from 'components/ChatImage'
+import PropTypes from 'prop-types'
 
 class ChatMedia extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class ChatMedia extends Component {
 
 ChatMedia.displayName = 'ChatMedia'
 ChatMedia.propTypes = {
-  message: React.PropTypes.object
+  message: PropTypes.object
 }
 
 export default ChatMedia

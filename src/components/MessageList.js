@@ -9,6 +9,7 @@ import OfflineForm from 'components/OfflineForm'
 import PrechatForm from 'components/PrechatForm'
 import ChatRating from 'components/ChatRating'
 import ChatRatingResult from 'components/ChatRatingResult'
+import PropTypes from 'prop-types'
 
 class MessageList extends Component {
   constructor(props) {
@@ -43,10 +44,16 @@ class MessageList extends Component {
           />
         )
       case 'chat.memberjoin':
-      case 'chat.memberleave':
       case 'chat.wait_queue':
       case 'typing':
         return <SystemMessage key={msg.type + msg.timestamp} message={msg} />
+      case 'chat.memberleave':
+        return (
+          <div key={msg.type + msg.timestamp}>
+            <SystemMessage message={msg} />
+            <ChatRating agent={msg} />
+          </div>
+        )
       case 'chat.request.rating':
         return <ChatRating agent={msg} key={msg.type + msg.timestamp} />
       case 'chat.rating':
@@ -142,10 +149,10 @@ class MessageList extends Component {
 
 MessageList.displayName = 'MessageList'
 MessageList.propTypes = {
-  messages: React.PropTypes.array,
-  agents: React.PropTypes.object,
-  isOffline: React.PropTypes.bool,
-  isChatting: React.PropTypes.bool
+  messages: PropTypes.array,
+  agents: PropTypes.object,
+  isOffline: PropTypes.bool,
+  isChatting: PropTypes.bool
 }
 MessageList.defaultProps = {
   messages: [],
