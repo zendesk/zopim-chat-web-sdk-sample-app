@@ -6,6 +6,7 @@ import Avatar from 'components/Avatar'
 import ChatMedia from 'components/ChatMedia'
 import { log } from 'utils'
 import zChat from 'vendor/web-sdk'
+import ReactMarkdown from 'react-markdown'
 
 class ChatMessage extends Component {
   constructor(props) {
@@ -67,7 +68,9 @@ class ChatMessage extends Component {
       default:
         return (
           <div className="chat-msg">
-            <span>{this.props.message.msg}</span>
+            <span>
+              <ReactMarkdown source={this.props.message.msg} />
+            </span>
             {this.renderOptions(this.props.message.options)}
           </div>
         )

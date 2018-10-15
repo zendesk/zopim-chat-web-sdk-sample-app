@@ -7,6 +7,7 @@ const dfltPort = 8000
 function getDefaultModules() {
   return {
     preLoaders: [
+      { test: /\.json$/, loader: 'json-loader' },
       {
         test: /\.(js|jsx)$/,
         include: srcPath,
