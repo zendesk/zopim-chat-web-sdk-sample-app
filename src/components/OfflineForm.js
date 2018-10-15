@@ -46,11 +46,10 @@ class OfflineForm extends Component {
     if (this.state.sent) {
       return (
         <div key="sent" className="offline-sent">
-          Your message has been sent. We will get back to you as soon as
-          possible.
+          Il tuo messaggio è stato inviato. Ti risponderemo il prima possibile.
           <ActionButton
             addClass="button-resend"
-            label="Send another"
+            label="Inviane un altro"
             onClick={this.sendAnother}
           />
         </div>
