@@ -14,7 +14,8 @@
     "serve:dist": "node server.js --env=dist",
     "start": "node server.js --env=dev",
     "postinstall": "curl -o ./vendor/web-sdk.js https://dev.zopim.com/web-sdk/latest/web-sdk.js",
-    "heroku-postbuild": "npm run dist"
+    "heroku-postbuild": "npm run dist",
+    "precommit": "lint-staged"
   },
   "repository": "",
   "keywords": [],
@@ -22,6 +23,12 @@
   "engineStrict": true,
   "engines": {
     "node": ">=4.5.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "node_modules/eslint/bin/eslint.js --fix",
+      "git add"
+    ]
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
@@ -43,6 +50,8 @@
     "eslint-plugin-react": "^5.0.0",
     "file-loader": "^0.8.4",
     "glob": "^7.0.0",
+    "husky": "^1.1.2",
+    "lint-staged": "^7.3.0",
     "minimist": "^1.2.0",
     "node-sass": "^3.4.2",
     "null-loader": "^0.1.1",

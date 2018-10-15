@@ -35,19 +35,7 @@ class ChatRatingResult extends Component {
     return (
       <CardContainer title="Valutazione Chat" addClass="chat-rating-card">
         Grazie per il feedback!{' '}
-        {this.props.agent.rating === 'good' ? '👍' : '👎'}
-        {/*<div className="buttons-container">
-          <ActionButton
-            addClass="button button-rate-down"
-            label="👎"
-            onClick={this.rateDown}
-          />
-          <ActionButton
-            addClass="button button-rate-up"
-            label="👍"
-            onClick={this.rateUp}
-          />
-        </div>*/}
+        {this.props.agent.new_rating === 'good' ? '👍' : '👎'}
       </CardContainer>
     )
   }

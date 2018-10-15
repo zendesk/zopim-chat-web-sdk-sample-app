@@ -93,8 +93,9 @@ class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (
-      !this.props.account_status !== !!nextProps.account_status &&
-      nextProps.account_status === 'online'
+      !this.props.data.chatOperatorSettings &&
+      this.props.data.connection !== 'connected' &&
+      nextProps.data.connection === 'connected'
     ) {
       this.getServicesStatus()
     }
@@ -144,7 +145,7 @@ class App extends Component {
         }
       })
 
-      const minConfidence = this.state.minConfidence
+      const { minConfidence } = this.props.data.chatbot
 
       qnaChat
         .sendChatMsg(msg)
@@ -242,7 +243,7 @@ class App extends Component {
   }
 
   checkKeyword(word) {
-    const { keywords } = this.state
+    const { keywords } = this.props.data.chatbot
 
     const cleanWord = word.trim().toLowerCase()
 
@@ -346,13 +347,17 @@ class App extends Component {
 
         const clientTime = new Date()
 
-        this.setState({
-          chatOperatorSettings,
-          serverToClientTimeSpan:
-            moment(json.serverTime).valueOf() - clientTime.getTime(),
-          // active: this.isServiceActive(chatBotSettings),
-          minConfidence: Number(chatBotSettings.addtInfo),
-          keywords
+        this.props.dispatch({
+          type: 'chat',
+          detail: {
+            type: 'chat.bot.settings',
+            chatOperatorSettings,
+            serverToClientTimeSpan:
+              moment(json.serverTime).valueOf() - clientTime.getTime(),
+            active: this.isServiceActive(chatBotSettings),
+            minConfidence: Number(chatBotSettings.addtInfo),
+            keywords
+          }
         })
       }
     })
@@ -363,7 +368,7 @@ class App extends Component {
   }
 
   getOperatorAvailabilityString() {
-    return this.state.chatOperatorSettings.reduce((res, next) => {
+    return this.props.data.chatbot.chatOperatorSettings.reduce((res, next) => {
       return `${res}${res.length > 0 ? ' o ' : ' '}dalle ${
         next.startTime
       } alle ${next.endTime}`
@@ -411,7 +416,7 @@ class App extends Component {
       }
     }
 
-    return this.state.chatOperatorSettings.reduce((res, next) => {
+    return this.props.data.chatbot.chatOperatorSettings.reduce((res, next) => {
       if (!res.available || !res.availableNow) {
         res = processItem(next)
       }
@@ -422,7 +427,9 @@ class App extends Component {
 
   getServerTime() {
     const clientTime = new Date()
-    return moment(clientTime.getTime() + this.state.serverToClientTimeSpan)
+    return moment(
+      clientTime.getTime() + this.props.data.chatbot.serverToClientTimeSpan
+    )
   }
 
   areOperatorsAvaliable() {
@@ -514,8 +521,9 @@ class App extends Component {
 
   isOffline() {
     return (
-      this.props.data.account_status === 'offline' &&
-      !this.props.data.is_chatting
+      (this.props.data.account_status === 'offline' &&
+        !this.props.data.is_chatting) ||
+      !!this.props.data.chatbot.active
     )
   }
 
