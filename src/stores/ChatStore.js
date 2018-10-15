@@ -93,6 +93,9 @@ function update(state = DEFAULT_STATE, action) {
         case 'chat.memberleave':
           if (!isAgent(action.detail.nick)) {
             new_state.is_chatting = false
+          } else {
+            // Turns on the chatbot
+            new_state.chatbot.active = true
           }
 
           // Concat this event to chats to be displayed
