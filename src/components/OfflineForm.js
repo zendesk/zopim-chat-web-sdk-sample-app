@@ -86,7 +86,7 @@ class OfflineForm extends Component {
   render() {
     return (
       <CardContainer
-        title={this.props.title}
+        title={!this.state.sent && this.props.title}
         addClass="offline-card"
         contentAddClass={this.state.sent ? 'sent' : ''}
         icon={<MessageSvg />}
