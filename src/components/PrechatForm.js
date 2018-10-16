@@ -29,7 +29,8 @@ class PrechatForm extends Component {
     zChat.setVisitorInfo(
       {
         display_name: this.refs.name.value,
-        email: this.refs.email.value
+        email: this.refs.email.value,
+        phone: this.refs.phone.value
       },
       err => {
         if (err) return
@@ -62,12 +63,16 @@ class PrechatForm extends Component {
       <form key="not-sent" className="offline-form">
         <div className="content">
           <div className="section">
-            <label className="label">Nome</label>
+            <label className="label">Nome e Cognome</label>
             <input ref="name" />
           </div>
           <div className="section">
             <label className="label">Email</label>
             <input ref="email" />
+          </div>
+          <div className="section">
+            <label className="label">Telefono</label>
+            <input ref="phone" />
           </div>
           <div className="section">
             <label className="label">Messaggio</label>

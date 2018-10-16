@@ -59,7 +59,7 @@ class OfflineForm extends Component {
         <form key="not-sent" className="offline-form">
           <div className="content">
             <div className="section">
-              <label className="label">Nome</label>
+              <label className="label">Nome e Cognome</label>
               <input ref="name" />
             </div>
             <div className="section">
