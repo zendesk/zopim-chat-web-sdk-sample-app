@@ -137,9 +137,9 @@ class App extends Component {
         type: 'chat',
         detail: {
           type: 'chat.msg',
-          nick: 'visitor:offline',
+          nick: 'visitor:Hype Bot',
           display_name: 'Hype Bot',
-          member_type: 'visitor',
+          member_type: 'agent',
           timestamp: +new Date(),
           msg
         }
@@ -155,7 +155,7 @@ class App extends Component {
               type: 'chat',
               detail: {
                 type: 'chat.msg',
-                nick: 'agent:offline',
+                nick: 'agent:trigger:Hype Bot',
                 display_name: 'Hype Bot',
                 member_type: 'agent',
                 timestamp: +new Date(),
@@ -168,7 +168,7 @@ class App extends Component {
               type: 'chat',
               detail: {
                 type: 'chat.msg',
-                nick: 'agent:offline',
+                nick: 'agent:trigger:Hype Bot',
                 display_name: 'Hype Bot',
                 member_type: 'agent',
                 timestamp: +new Date(),
@@ -263,7 +263,7 @@ class App extends Component {
         type: 'chat',
         detail: {
           type: 'prechat',
-          nick: 'agent:offline',
+          nick: 'agent:trigger:Hype Bot',
           display_name: 'Hype Bot',
           member_type: 'agent',
           timestamp: +new Date(),
@@ -280,7 +280,7 @@ class App extends Component {
         type: 'chat',
         detail: {
           type: 'offline',
-          nick: 'agent:offline',
+          nick: 'agent:trigger:Hype Bot',
           display_name: 'Hype Bot',
           member_type: 'agent',
           timestamp: +new Date(),

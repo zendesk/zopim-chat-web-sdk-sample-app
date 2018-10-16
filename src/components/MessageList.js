@@ -38,7 +38,7 @@ class MessageList extends Component {
           <ChatMessage
             key={msg.type + msg.timestamp}
             message={msg}
-            addClass={addClass}
+            addClass={msg.nick.indexOf('agent:trigger') > -1 ? 'bot' : addClass}
             agent={this.props.agents[msg.nick]}
           />
         )
@@ -98,10 +98,10 @@ class MessageList extends Component {
       messages.splice(0, 0, {
         type: 'chat.msg',
         display_name: 'Hype Bot',
-        nick: 'agent:offline',
+        nick: 'agent:trigger:Hype Bot',
         timestamp: +new Date(),
         member_type: 'agent',
-        msg: 'Ciao sono Hypebot e puoi chiedermi quello che vuoi!'
+        msg: 'Ciao sono Hype Bot e puoi chiedermi quello che vuoi!'
       })
       // messages.push({
       //   type: 'offline'

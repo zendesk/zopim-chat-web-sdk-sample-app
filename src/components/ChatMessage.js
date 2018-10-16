@@ -91,6 +91,7 @@ class ChatMessage extends Component {
         <div className="avatar-container">
           <Avatar entity={this.props.agent} />
         </div>
+        <span className="chat-msg-arrow" />
         <div className="chat-msg-wrapper">
           {this.renderMessagePart(this.props.message)}
         </div>
