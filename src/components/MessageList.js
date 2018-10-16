@@ -38,7 +38,7 @@ class MessageList extends Component {
           <ChatMessage
             key={msg.type + msg.timestamp}
             message={msg}
-            addClass={msg.nick.indexOf('agent:trigger') > -1 ? 'bot' : addClass}
+            addClass={msg.nick.startsWith('agent:trigger') ? 'bot' : addClass}
             agent={this.props.agents[msg.nick]}
           />
         )

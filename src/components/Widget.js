@@ -216,7 +216,9 @@ class App extends Component {
     if (this.isOffline()) return
 
     // Only send the first file dropped on input
-    const file = event.dataTransfer.files[0]
+    const file = event.dataTransfer
+      ? event.dataTransfer.files[0]
+      : event.target.files[0]
 
     // Generate attachment object for local echo
     const attachment = {
@@ -560,6 +562,8 @@ class App extends Component {
           <StatusContainer
             accountStatus={this.props.data.account_status}
             minimizeOnClick={this.minimizeOnClick}
+            onFileUpload={this.handleFileUpload}
+            isOffline={isOffline}
           />
           <MessageList
             isChatting={this.props.data.is_chatting}

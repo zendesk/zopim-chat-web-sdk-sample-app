@@ -172,6 +172,27 @@ svg {
     }
 }
 
+.options-button {
+    position: absolute;
+    width: 48px;
+    top: 0;
+    right: 48px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+
+    &-bar:after {
+      height: 100px;
+      color: #fff;
+      content: '\261D';
+      width: 16px;
+      top: 0;
+      position: absolute;
+      font-size: 20px;
+    }
+}
+
 .message-list-container {
     flex-grow: 1;
     flex-shrink: 1;
