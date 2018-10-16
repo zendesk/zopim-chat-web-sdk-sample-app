@@ -15,8 +15,8 @@ class StatusContainer extends Component {
     return <div className="card-icon">{!isString && this.props.icon}</div>
   }
 
-  onUploadClick(event) {
-    event.preventDefault()
+  onUploadClick(/*event*/) {
+    // event.preventDefault()
     this.refs.fileUploadInput.click()
   }
 
@@ -41,18 +41,18 @@ class StatusContainer extends Component {
         {!this.props.isOffline && (
           <div className="options-button" onClick={this.onUploadClick}>
             <div className="options-button-bar" />
+            <input
+              ref="fileUploadInput"
+              type="file"
+              style={{ visibility: 'hidden', width: 1 }}
+              onChange={e => {
+                this.props.onFileUpload(e)
+                this.refs.fileUploadInput.value = ''
+              }}
+            />
           </div>
         )}
         <div className="minimize-button" onClick={this.props.minimizeOnClick}>
-          <input
-            ref="fileUploadInput"
-            type="file"
-            style={{ visibility: 'hidden' }}
-            onChange={e => {
-              this.props.onFileUpload(e)
-              this.refs.fileUploadInput.value = ''
-            }}
-          />
           <div className="minimize-button-bar" />
         </div>
       </div>
