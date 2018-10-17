@@ -49,6 +49,8 @@ class App extends Component {
     this.setVisible = this.setVisible.bind(this)
     this.setTheme = this.setTheme.bind(this)
     this.handleFileUpload = this.handleFileUpload.bind(this)
+
+    this.textInput = React.createRef()
   }
 
   componentDidMount() {
@@ -119,14 +121,14 @@ class App extends Component {
   handleOnSubmit(event) {
     event && event.preventDefault()
 
-    const msg = this.refs.input.getRawInput().value
+    const msg = this.textInput.current.getRawInput().value
 
     // Don't send empty messages
     if (!msg) return
 
     // Don't allow visitor to send msg if not chatting
     if (this.isOffline()) {
-      this.refs.input.getRawInput().value = ''
+      this.textInput.current.getRawInput().value = ''
 
       if (this.checkKeyword(msg)) {
         this.handleRequestOperator(true)
@@ -180,7 +182,7 @@ class App extends Component {
           }
         })
         .catch(err => {
-          this.refs.input.getRawInput().value = ''
+          this.textInput.current.getRawInput().value = ''
           if (err) {
             log('Error occured >>>', err)
             return
@@ -206,7 +208,7 @@ class App extends Component {
         msg
       }
     })
-    this.refs.input.getRawInput().value = ''
+    this.textInput.current.getRawInput().value = ''
   }
 
   handleFileUpload(event) {
@@ -328,23 +330,20 @@ class App extends Component {
         })
 
         const keywords = chatOperatorSettings
-          .reduce(
-            (res, next) => {
-              //@hack this merges any local and remote keywords into an unique object
-              //refactor it if it doesn't satisfies the requirements anymore
+          .reduce((res, next) => {
+            //@hack this merges any local and remote keywords into an unique object
+            //refactor it if it doesn't satisfies the requirements anymore
 
-              let remoteKeywords
+            let remoteKeywords
 
-              try {
-                remoteKeywords = JSON.parse(next.addtInfo).keywords
-              } catch (e) {
-                remoteKeywords = []
-              }
+            try {
+              remoteKeywords = JSON.parse(next.addtInfo).keywords
+            } catch (e) {
+              remoteKeywords = []
+            }
 
-              return [...new Set([...res, ...remoteKeywords])]
-            },
-            { keywords: KEYWORDS }
-          )
+            return [...new Set([...res, ...remoteKeywords])]
+          }, KEYWORDS)
           .filter(k => !!k)
 
         const clientTime = new Date()
@@ -583,7 +582,7 @@ class App extends Component {
           </div>
           <Input
             addClass={/*this.props.data.is_chatting ?*/ 'visible' /*: ''*/}
-            ref="input"
+            ref={this.textInput}
             onSubmit={this.handleOnSubmit}
             onChange={this.handleOnChange}
             onFocus={this.inputOnFocus}

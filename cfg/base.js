@@ -7,12 +7,12 @@ const defaultSettings = require('./defaults')
 // @example:
 // let npmBase = path.join(__dirname, '../node_modules');
 // let additionalPaths = [ path.join(npmBase, 'react-bootstrap') ];
-const additionalPaths = []
+// const additionalPaths = []
 
 module.exports = {
-  additionalPaths: additionalPaths,
-  port: defaultSettings.port,
-  debug: true,
+  // additionalPaths: additionalPaths,
+  // port: defaultSettings.port,
+  mode: 'development',
   devtool: 'eval',
   output: {
     path: path.join(__dirname, '/../dist/assets'),
@@ -28,7 +28,7 @@ module.exports = {
     noInfo: false
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx'],
     alias: {
       actions: `${defaultSettings.srcPath}/actions/`,
       components: `${defaultSettings.srcPath}/components/`,

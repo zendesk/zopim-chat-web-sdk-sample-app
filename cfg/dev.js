@@ -6,9 +6,6 @@ const baseConfig = require('./base')
 const defaultSettings = require('./defaults')
 const Dotenv = require('dotenv-webpack')
 
-// Add needed plugins here
-const BowerWebpackPlugin = require('bower-webpack-plugin')
-
 const config = Object.assign({}, baseConfig, {
   entry: [
     'webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
@@ -20,20 +17,20 @@ const config = Object.assign({}, baseConfig, {
   plugins: [
     new Dotenv(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new BowerWebpackPlugin({
-      searchResolveModulesDirectories: false
-    })
+    new webpack.NoEmitOnErrorsPlugin()
   ],
-  module: defaultSettings.getDefaultModules(),
-  postcss: defaultSettings.postcss
+  module: defaultSettings.getDefaultModules()
 })
 
 // Add needed loaders to the defaults here
-config.module.loaders.push({
+config.module.rules.push({
   test: /\.(js|jsx)$/,
-  loader: 'react-hot!babel-loader',
-  include: [].concat(config.additionalPaths, [path.join(__dirname, '/../src')])
+  use: {
+    loader: 'babel-loader'
+  },
+  include: [].concat(
+    /*config.additionalPaths,*/ [path.join(__dirname, '/../src')]
+  )
 })
 
 module.exports = config

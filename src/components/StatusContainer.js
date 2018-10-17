@@ -8,6 +8,8 @@ class StatusContainer extends Component {
     super(props)
     this.getStatusText = this.getStatusText.bind(this)
     this.onUploadClick = this.onUploadClick.bind(this)
+
+    this.fileUploadInput = React.createRef()
   }
 
   renderIcon() {
@@ -17,7 +19,7 @@ class StatusContainer extends Component {
 
   onUploadClick(/*event*/) {
     // event.preventDefault()
-    this.refs.fileUploadInput.click()
+    this.fileUploadInput.current.click()
   }
 
   getStatusText(status) {
@@ -42,12 +44,12 @@ class StatusContainer extends Component {
           <div className="options-button" onClick={this.onUploadClick}>
             <div className="options-button-bar" />
             <input
-              ref="fileUploadInput"
+              ref={this.fileUploadInput}
               type="file"
               style={{ visibility: 'hidden', width: 1 }}
               onChange={e => {
                 this.props.onFileUpload(e)
-                this.refs.fileUploadInput.value = ''
+                this.fileUploadInput.current.value = ''
               }}
             />
           </div>

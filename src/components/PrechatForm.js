@@ -17,20 +17,25 @@ class PrechatForm extends Component {
     }
     this.send = this.send.bind(this)
     this.renderChild = this.renderChild.bind(this)
+
+    this.nameInput = React.createRef()
+    this.emailInput = React.createRef()
+    this.phoneInput = React.createRef()
+    this.messageInput = React.createRef()
   }
 
   send(event) {
     event.preventDefault()
-    const msg = this.refs.message.value
+    const msg = this.messageInput.current.value
 
     // Don't send empty messages
     if (!msg) return
 
     zChat.setVisitorInfo(
       {
-        display_name: this.refs.name.value,
-        email: this.refs.email.value,
-        phone: this.refs.phone.value
+        display_name: this.nameInput.current.value,
+        email: this.emailInput.current.value,
+        phone: this.phoneInput.current.value
       },
       err => {
         if (err) return
@@ -64,19 +69,19 @@ class PrechatForm extends Component {
         <div className="content">
           <div className="section">
             <label className="label">Nome e Cognome</label>
-            <input ref="name" />
+            <input ref={this.nameInput} />
           </div>
           <div className="section">
             <label className="label">Email</label>
-            <input ref="email" />
+            <input ref={this.emailInput} />
           </div>
           <div className="section">
             <label className="label">Telefono</label>
-            <input ref="phone" />
+            <input ref={this.phoneInput} />
           </div>
           <div className="section">
             <label className="label">Messaggio</label>
-            <textarea ref="message" />
+            <textarea ref={this.messageInput} />
           </div>
         </div>
         <div className="button-container">

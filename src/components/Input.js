@@ -11,10 +11,12 @@ class Input extends Component {
     this.onDragOver = this.onDragOver.bind(this)
     this.onDrop = this.onDrop.bind(this)
     this.onDragLeave = this.onDragLeave.bind(this)
+
+    this.textInput = React.createRef()
   }
 
   getRawInput() {
-    return this.refs.input
+    return this.textInput.current
   }
 
   onDragOver(event) {
@@ -50,7 +52,7 @@ class Input extends Component {
         <form className="input-form" onSubmit={this.props.onSubmit}>
           <input
             className="input"
-            ref="input"
+            ref={this.textInput}
             placeholder="Scrivi un messaggio"
             onChange={this.props.onChange}
             onFocus={this.props.onFocus}
