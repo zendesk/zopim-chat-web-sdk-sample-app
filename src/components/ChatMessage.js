@@ -62,6 +62,17 @@ class ChatMessage extends Component {
     )
   }
 
+  parseMessage(msg) {
+    return msg.replace(
+      /(?:<\s?a[^"']+href=["']|\[[^\]]+\]\()?((https?:\/\/|s?ftp:\/\/)?([a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?))(?:["']>[^<]*<\/\s?a\s?>|\))?/gi,
+      this.replaceMatchInMessage
+    )
+  }
+
+  replaceMatchInMessage(match, fullUrl, protocol, url) {
+    return `<a href="${protocol || '//'}${url}" target="_blank">${fullUrl}</a>`
+  }
+
   renderMessagePart(msg) {
     switch (msg.type) {
       case 'chat.file':
@@ -71,7 +82,7 @@ class ChatMessage extends Component {
           <div className="chat-msg">
             <span>
               <ReactMarkdown
-                source={this.props.message.msg}
+                source={this.parseMessage(this.props.message.msg)}
                 escapeHtml={false}
               />
             </span>
