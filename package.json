@@ -1,8 +1,8 @@
 {
-  "name": "chat-web-sdk-react-sample",
+  "name": "@hype/chat-widget",
   "private": true,
   "version": "0.0.1",
-  "description": "Zopim Web SDK Sample App (React)",
+  "description": "Zopim + QnA Chat Web Widget (React)",
   "main": "",
   "scripts": {
     "clean": "rimraf dist/*",
