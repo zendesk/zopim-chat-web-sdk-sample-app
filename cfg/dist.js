@@ -18,13 +18,12 @@ const config = Object.assign({}, baseConfig, {
         BOT_ACCOUNT_KEY: JSON.stringify(process.env.BOT_ACCOUNT_KEY),
         BOT_ENDPOINT: JSON.stringify(process.env.BOT_ENDPOINT),
         EMAIL_ADDRESS: JSON.stringify(process.env.EMAIL_ADDRESS),
-        SERVICES_CHECK_URL: JSON.stringify(process.env.SERVICES_CHECK_URL)
+        SERVICES_CHECK_URL: JSON.stringify(process.env.SERVICES_CHECK_URL),
+        BABEL_ENV: JSON.stringify('production'),
+        NODE_ENV: JSON.stringify('production')
       }
     }),
     new webpack.optimize.DedupePlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
-    }),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
