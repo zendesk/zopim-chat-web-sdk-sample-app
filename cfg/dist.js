@@ -5,6 +5,7 @@ const webpack = require('webpack')
 
 const baseConfig = require('./base')
 const defaultSettings = require('./defaults')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const config = Object.assign({}, baseConfig, {
   entry: path.join(__dirname, '../src/index'),
@@ -23,12 +24,34 @@ const config = Object.assign({}, baseConfig, {
         NODE_ENV: JSON.stringify('production')
       }
     }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          mangle: true,
+          warnings: false,
+          screw_ie8: true, // eslint-disable-line camelcase
+          conditionals: true,
+          unused: true,
+          comparisons: true,
+          sourceMap: true,
+          sequences: true,
+          dead_code: true, // eslint-disable-line camelcase
+          evaluate: true,
+          compress: {
+            drop_console: true // eslint-disable-line camelcase
+          },
+          if_return: true, // eslint-disable-line camelcase
+          join_vars: true, // eslint-disable-line camelcase
+          output: { comments: false }
+        }
+      })
+    ]
+  },
   module: defaultSettings.getDefaultModules()
 })
 
