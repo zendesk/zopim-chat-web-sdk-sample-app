@@ -94,6 +94,22 @@ svg {
     margin-right: 8px;
 }
 
+.upload-button {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: $theme-color;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    padding-right: 2px;
+    padding-top: 4px;
+}
+
 .message-svg {
     path {
         fill: $theme-color;
@@ -169,27 +185,6 @@ svg {
         width: 16px;
         top: 50%;
         position: absolute;
-    }
-}
-
-.options-button {
-    position: absolute;
-    width: 48px;
-    top: 0;
-    right: 48px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-
-    &-bar:after {
-      height: 100px;
-      color: #fff;
-      content: '\261D';
-      width: 16px;
-      top: 0;
-      position: absolute;
-      font-size: 20px;
     }
 }
 

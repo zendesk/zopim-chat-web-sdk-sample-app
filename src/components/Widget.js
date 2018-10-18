@@ -561,7 +561,6 @@ class App extends Component {
           <StatusContainer
             accountStatus={this.props.data.account_status}
             minimizeOnClick={this.minimizeOnClick}
-            onFileUpload={this.handleFileUpload}
             isOffline={isOffline}
           />
           <MessageList
@@ -587,6 +586,7 @@ class App extends Component {
             onChange={this.handleOnChange}
             onFocus={this.inputOnFocus}
             onFileUpload={this.handleFileUpload}
+            isOffline={isOffline}
           />
         </div>
         <ChatButton

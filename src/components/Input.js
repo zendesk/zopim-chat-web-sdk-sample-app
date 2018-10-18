@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import SendButton from 'components/SendButton'
+import UploadButton from 'components/UploadButton'
 import PropTypes from 'prop-types'
 
 class Input extends Component {
@@ -50,6 +51,10 @@ class Input extends Component {
         onDragLeave={this.onDragLeave}
       >
         <form className="input-form" onSubmit={this.props.onSubmit}>
+          <UploadButton
+            onFileUpload={this.props.onFileUpload}
+            isOffline={this.props.isOffline}
+          />
           <input
             className="input"
             ref={this.textInput}
@@ -70,7 +75,8 @@ Input.propTypes = {
   onSubmit: PropTypes.func,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
-  onFileUpload: PropTypes.func
+  onFileUpload: PropTypes.func,
+  isOffline: PropTypes.bool
 }
 
 export default Input
