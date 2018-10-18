@@ -64,13 +64,31 @@ class ChatMessage extends Component {
 
   parseMessage(msg) {
     return msg.replace(
-      /(?:<\s?a[^"']+href=["']|\[[^\]]+\]\()?((https?:\/\/|s?ftp:\/\/)?([a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?))(?:["']>[^<]*<\/\s?a\s?>|\))?/gi,
-      this.replaceMatchInMessage
+      /(?:<a[^"']+href=["']|\[[^\]]+\]\()?((https?:\/\/|s?ftp:\/\/)?([a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?))(?:["'>][^<]+<\/a>|\))?/gi,
+      this.replaceLinksInMessage
     )
   }
 
-  replaceMatchInMessage(match, fullUrl, protocol, url) {
-    return `<a href="${protocol || '//'}${url}" target="_blank">${fullUrl}</a>`
+  replaceLinksInMessage(match, fullUrl, protocol, url) {
+    const plainTextRegex = /^\w/gi
+    const htmlAnchorRegex = /<[^>]+href=["']([^"']+)["'][^>]+>([^>]+)<\/[^>]+>/gi
+    const markdownLinkRegex = /\[([^\]]+)\]\(([^)]+)\)/gi
+
+    let linkText = ''
+
+    if (plainTextRegex.test(match)) {
+      linkText = fullUrl
+    }
+
+    if (!linkText || linkText === match) {
+      linkText = match.replace(htmlAnchorRegex, '$2')
+    }
+
+    if (!linkText || linkText === match) {
+      linkText = match.replace(markdownLinkRegex, '$1')
+    }
+
+    return `<a href="${protocol || '//'}${url}" target="_blank">${linkText}</a>`
   }
 
   renderMessagePart(msg) {
