@@ -1,4 +1,4 @@
-import { log, isAgent, isTrigger } from 'utils'
+import { log, isAgent, isTrigger, set } from 'utils'
 import { createStore } from 'redux'
 import SortedMap from 'collections/sorted-map'
 
@@ -93,9 +93,6 @@ function update(state = DEFAULT_STATE, action) {
         case 'chat.memberleave':
           if (!isAgent(action.detail.nick)) {
             new_state.is_chatting = false
-          } else {
-            // Turns on the chatbot
-            new_state.chatbot.active = true
           }
 
           // Concat this event to chats to be displayed
@@ -148,6 +145,9 @@ function update(state = DEFAULT_STATE, action) {
             ...action.detail,
             type: undefined
           }
+
+          set('chatbotActive', new_state.chatbot.active)
+
           return new_state
         default:
           return state

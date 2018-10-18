@@ -355,7 +355,10 @@ class App extends Component {
             chatOperatorSettings,
             serverToClientTimeSpan:
               moment(json.serverTime).valueOf() - clientTime.getTime(),
-            active: this.isServiceActive(chatBotSettings),
+            active:
+              get('chatbotActive') === undefined
+                ? this.isServiceActive(chatBotSettings)
+                : get('chatbotActive'),
             minConfidence: Number(chatBotSettings.addtInfo),
             keywords
           }
