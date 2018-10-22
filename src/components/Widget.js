@@ -309,6 +309,9 @@ class App extends Component {
 
         const zChatOperatorSettings = zChat.getOperatingHours()
 
+        //@todo check if zChatOperatorSettings is null, if so, enable the chat h24
+        //@todo check if zChatOperatorSettings has no department configs, if so, use the account hours
+
         const chatOperatorSettings = Object.keys(
           zChatOperatorSettings.department_schedule
         ).map(k => {
