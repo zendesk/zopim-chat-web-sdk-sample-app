@@ -6,7 +6,6 @@ This sample app demonstrates how to build a simple chat widget using the [Zendes
 
 The sample app is built using the [React](https://facebook.github.io/react/) framework and [Redux](http://redux.js.org/) architecture. However, you are free to use any other JavaScript framework to develop your own chat widget.
 
-
 Screenshots:
 
 | Normal                             | Docked                             |
