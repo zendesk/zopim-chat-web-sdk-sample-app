@@ -296,6 +296,65 @@ class App extends Component {
     }
   }
 
+  _parseChatOperatingHours(zChatOperatorSettings, template) {
+    if (!!zChatOperatorSettings) {
+      switch (zChatOperatorSettings.type) {
+        case 'department':
+          return Object.keys(zChatOperatorSettings.department_schedule).map(
+            k => {
+              const startT = new Date()
+              const endT = new Date()
+
+              const currDaySettings =
+                zChatOperatorSettings.department_schedule[k][startT.getDay()]
+
+              startT.setHours(0, currDaySettings[0].start, 0, 0)
+              endT.setHours(0, currDaySettings[0].end, 0, 0)
+
+              return {
+                ...template,
+                startTime: startT.toLocaleTimeString().replace(/\:\d\d$/, ''),
+                endTime: endT.toLocaleTimeString().replace(/\:\d\d$/, ''),
+                status: zChatOperatorSettings.enabled ? 'ACTIVE' : 'INACTIVE'
+              }
+            }
+          )
+        case 'account':
+          return ((startT, endT) => {
+            const currDaySettings =
+              zChatOperatorSettings.account_schedule[startT.getDay()]
+
+            startT.setHours(0, currDaySettings[0].start, 0, 0)
+            endT.setHours(0, currDaySettings[0].end, 0, 0)
+
+            return [
+              {
+                ...template,
+                startTime: startT.toLocaleTimeString().replace(/\:\d\d$/, ''),
+                endTime: endT.toLocaleTimeString().replace(/\:\d\d$/, ''),
+                status: zChatOperatorSettings.enabled ? 'ACTIVE' : 'INACTIVE'
+              }
+            ]
+          })(new Date(), new Date())
+        default:
+          throw 'unhandled operating hours type'
+      }
+    }
+
+    return ((startT, endT) => {
+      startT.setHours(0, 1, 0, 0)
+      endT.setHours(23, 59, 0, 0)
+
+      return [
+        {
+          ...template,
+          startTime: startT.toLocaleTimeString().replace(/\:\d\d$/, ''),
+          endTime: endT.toLocaleTimeString().replace(/\:\d\d$/, '')
+        }
+      ]
+    })(new Date(), new Date())
+  }
+
   getServicesStatus() {
     return qnaChat.getServicesStatus().then(json => {
       if (json.hypeNoAuthServiceList) {
@@ -303,34 +362,10 @@ class App extends Component {
           x => x.service === 'CHATBOT'
         )
 
-        const chatOperatorSettingTemplate = json.hypeNoAuthServiceList.find(
-          x => x.service === 'CHAT'
+        const chatOperatorSettings = this._parseChatOperatingHours(
+          zChat.getOperatingHours(),
+          json.hypeNoAuthServiceList.find(x => x.service === 'CHAT')
         )
-
-        const zChatOperatorSettings = zChat.getOperatingHours()
-
-        //@todo check if zChatOperatorSettings is null, if so, enable the chat h24
-        //@todo check if zChatOperatorSettings has no department configs, if so, use the account hours
-
-        const chatOperatorSettings = Object.keys(
-          zChatOperatorSettings.department_schedule
-        ).map(k => {
-          const startT = new Date()
-          const endT = new Date()
-
-          const currDaySettings =
-            zChatOperatorSettings.department_schedule[k][startT.getDay()]
-
-          startT.setHours(0, currDaySettings[0].start, 0, 0)
-          endT.setHours(0, currDaySettings[0].end, 0, 0)
-
-          return {
-            ...chatOperatorSettingTemplate,
-            startTime: startT.toLocaleTimeString().replace(/\:\d\d$/, ''),
-            endTime: endT.toLocaleTimeString().replace(/\:\d\d$/, ''),
-            status: zChatOperatorSettings.enabled ? 'ACTIVE' : 'INACTIVE'
-          }
-        })
 
         const keywords = chatOperatorSettings
           .reduce((res, next) => {
