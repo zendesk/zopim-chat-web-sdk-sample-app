@@ -9,6 +9,7 @@ import OfflineForm from 'components/OfflineForm'
 import PrechatForm from 'components/PrechatForm'
 import ChatRating from 'components/ChatRating'
 import PropTypes from 'prop-types'
+import { isTrigger } from 'utils'
 
 class MessageList extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class MessageList extends Component {
           <ChatMessage
             key={msg.type + msg.timestamp}
             message={msg}
-            addClass={msg.nick.startsWith('agent:trigger') ? 'bot' : addClass}
+            addClass={isTrigger(msg.nick) ? 'bot' : addClass}
             agent={this.props.agents[msg.nick]}
           />
         )

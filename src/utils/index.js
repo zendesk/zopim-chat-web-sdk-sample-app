@@ -12,7 +12,7 @@ export function isAgent(nick) {
 }
 
 export function isTrigger(nick) {
-  return nick.startsWith('agent:trigger:Hype Bot')
+  return nick.startsWith('agent:trigger')
 }
 
 export * from './PersistentStorage'
