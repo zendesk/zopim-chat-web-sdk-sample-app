@@ -1,11 +1,68 @@
 $theme-color: #00a5fd;
 
+/* latin-ext */
 @font-face {
-    font-family: DNLTL;
-    -moz-font-feature-settings: "liga=0";
-    -moz-font-feature-settings: "liga" 0;
-    src: url("https://d1eipm3vz40hy0.cloudfront.net/fonts/DNLTL.eot");
-    src: url("https://d1eipm3vz40hy0.cloudfront.net/fonts/DNLTL.eot?#iefix") format("embedded-opentype"),url("https://d1eipm3vz40hy0.cloudfront.net/fonts/DNLTL.woff") format("woff"),url("https://d1eipm3vz40hy0.cloudfront.net/fonts/DNLTL.ttf") format("truetype"),url("https://d1eipm3vz40hy0.cloudfront.net/fonts/DNLTL.svg#DNLTL") format("svg")
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Muli Light'), local('Muli-Light'), url(https://fonts.gstatic.com/s/muli/v12/7Au_p_0qiz-adZnkOCv2z3wM.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Muli Light'), local('Muli-Light'), url(https://fonts.gstatic.com/s/muli/v12/7Au_p_0qiz-adZnkOCX2zw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Muli Regular'), local('Muli-Regular'), url(https://fonts.gstatic.com/s/muli/v12/7Auwp_0qiz-afTzGLRrX.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Muli Regular'), local('Muli-Regular'), url(https://fonts.gstatic.com/s/muli/v12/7Auwp_0qiz-afTLGLQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Muli Bold'), local('Muli-Bold'), url(https://fonts.gstatic.com/s/muli/v12/7Au_p_0qiz-adYnjOCv2z3wM.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Muli Bold'), local('Muli-Bold'), url(https://fonts.gstatic.com/s/muli/v12/7Au_p_0qiz-adYnjOCX2zw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Muli ExtraBold'), local('Muli-ExtraBold'), url(https://fonts.gstatic.com/s/muli/v12/7Au_p_0qiz-adZXgOCv2z3wM.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Muli';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Muli ExtraBold'), local('Muli-ExtraBold'), url(https://fonts.gstatic.com/s/muli/v12/7Au_p_0qiz-adZXgOCX2zw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 .widget-container {
@@ -23,7 +80,7 @@ $theme-color: #00a5fd;
 
     *, *:before, *:after {
         box-sizing: border-box;
-        font-family: DNLTL;
+        font-family: Muli;
         overflow: hidden;
     }
 
@@ -100,7 +157,7 @@ svg {
     height: 30px;
     border-radius: 15px;
     background-color: $theme-color;
-    margin-left: 8px;
+    margin-right: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,7 +301,13 @@ svg {
     }
 
     .agent.bot & {
-      border-right: 4px solid #DDDDDD;
+      top: 16px;
+      left: 36px;
+      margin-top: -2px;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-right: 4px solid rgb(204, 237, 255);
+      // border-right: 4px solid #DDDDDD;
     }
 
     .visitor & {
@@ -257,11 +320,17 @@ svg {
 }
 
 .chat-msg {
-    padding: 16px;
+    // padding: 16px;
     border-radius: 4px;
-    line-height: 20px;
-    font-size: 14px;
-    color: #555555;
+    // line-height: 20px;
+    // font-size: 14px;
+    // color: #555555;
+
+    width: 100%;
+    font-size: 12px;
+    color: rgb(69, 63, 107);
+    margin: 0;
+    padding: 8px;
 
     .visitor & {
         background: rgb(244, 244, 244);
@@ -272,8 +341,14 @@ svg {
     }
 
     .bot & {
-        border: 1px solid #DDDDDD;
-        background: #FFFFFF;
+        background: rgb(204, 237, 255);
+        // border: 1px solid #DDDDDD;
+        // background: #FFFFFF;
+    }
+
+    & p {
+        padding: 0;
+        margin: 0;
     }
 }
 

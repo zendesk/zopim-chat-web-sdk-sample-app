@@ -98,6 +98,7 @@ class ChatMessage extends Component {
       default:
         return (
           <div className="chat-msg">
+            <b>{msg.display_name}</b>
             <span>
               <ReactMarkdown
                 source={this.parseMessage(this.props.message.msg)}

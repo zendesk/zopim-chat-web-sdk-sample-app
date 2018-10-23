@@ -164,8 +164,8 @@ class App extends Component {
         type: 'chat',
         detail: {
           type: 'chat.msg',
-          nick: 'visitor:Hype Bot',
-          display_name: 'Hype Bot',
+          nick: 'visitor:user',
+          display_name: 'Tu',
           member_type: 'agent',
           timestamp: +new Date(),
           msg

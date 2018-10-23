@@ -51,10 +51,6 @@ class Input extends Component {
         onDragLeave={this.onDragLeave}
       >
         <form className="input-form" onSubmit={this.props.onSubmit}>
-          <UploadButton
-            onFileUpload={this.props.onFileUpload}
-            isOffline={this.props.isOffline}
-          />
           <input
             className="input"
             ref={this.textInput}
@@ -62,7 +58,15 @@ class Input extends Component {
             onChange={this.props.onChange}
             onFocus={this.props.onFocus}
           />
-          <SendButton onClick={this.props.onSubmit} />
+          {!!this.props.isOffline ||
+          (!!this.textInput.current && !!this.textInput.current.value) ? (
+            <SendButton onClick={this.props.onSubmit} />
+          ) : (
+            <UploadButton
+              onFileUpload={this.props.onFileUpload}
+              isOffline={this.props.isOffline}
+            />
+          )}
         </form>
       </div>
     )
