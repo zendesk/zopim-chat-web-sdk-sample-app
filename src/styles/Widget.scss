@@ -259,6 +259,8 @@ svg {
     margin-bottom: 16px;
     position: relative;
 
+    min-height: 32px;
+
     &.visitor {
         align-items: flex-end;
         width: 100%;

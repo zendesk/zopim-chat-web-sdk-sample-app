@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Avatar from 'components/Avatar'
 import ChatMedia from 'components/ChatMedia'
-import { log } from 'utils'
+import { log, isAgent } from 'utils'
 import zChat from 'vendor/web-sdk'
 import ReactMarkdown from 'react-markdown/with-html'
 import PropTypes from 'prop-types'
@@ -98,7 +98,8 @@ class ChatMessage extends Component {
       default:
         return (
           <div className="chat-msg">
-            <b>{msg.display_name}</b>
+            {isAgent(msg.nick) && <b>{msg.display_name}</b>}
+
             <span>
               <ReactMarkdown
                 source={this.parseMessage(this.props.message.msg)}
