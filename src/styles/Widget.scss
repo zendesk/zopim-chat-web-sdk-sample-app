@@ -151,6 +151,28 @@ svg {
     margin-right: 8px;
 }
 
+.rating-button{
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #f4f4f4;
+  max-width: 32px;
+
+  & * {
+      stroke: #555555;
+    }
+
+  &.selected {
+    background-color: $theme-color;
+
+    & * {
+      stroke: #fff;
+    }
+
+  }
+}
+
 .upload-button {
     cursor: pointer;
     width: 30px;
@@ -455,6 +477,11 @@ svg {
 
     .button:not(:last-child) {
         margin-right: 8px;
+    }
+
+    &.rating{
+        justify-content: center;
+        align-items: center;
     }
 }
 

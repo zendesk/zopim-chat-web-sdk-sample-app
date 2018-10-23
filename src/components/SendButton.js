@@ -14,12 +14,35 @@ class SendButton extends Component {
         className={`send-button ${this.props.addClass || ''}`}
         onClick={this.props.onClick}
       >
-        <svg width="12" height="13" viewBox="0 0 12 13">
-          <path
-            d="M3 6L0 0c-.056.14 12 6 12 6L0 13c.053.083 3-7 3-7z"
-            fill="#FFF"
-            fillRule="evenodd"
-          />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="2 0 24 24"
+          width="18"
+          height="18"
+        >
+          <title>send</title>
+          <g
+            className="nc-icon-wrapper"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            fill="#ffffff"
+            stroke="#ffffff"
+          >
+            <polyline
+              data-cap="butt"
+              fill="none"
+              stroke="#ffffff"
+              strokeMiterlimit="10"
+              points="22,2 7,14 7,21 10.6,16.7 "
+            />{' '}
+            <polygon
+              fill="none"
+              stroke="#ffffff"
+              strokeMiterlimit="10"
+              points="2,10 22,2 18,22 "
+            />
+          </g>
         </svg>
       </div>
     )

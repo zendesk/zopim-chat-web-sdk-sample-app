@@ -40,7 +40,7 @@ class MessageList extends Component {
             key={msg.type + msg.timestamp}
             message={msg}
             addClass={isTrigger(msg.nick) ? 'bot' : addClass}
-            agent={this.props.agents[msg.nick]}
+            agent={this.props.agents[msg.nick] || msg}
           />
         )
       case 'chat.memberjoin':
@@ -52,9 +52,7 @@ class MessageList extends Component {
         return (
           <div key={msg.type + msg.timestamp}>
             <SystemMessage message={msg} />
-            {isAgent(msg.nick) && (
-              <ChatRating agent={msg} leaveAfterFeedback={true} />
-            )}
+            {isAgent(msg.nick) && <ChatRating agent={msg} />}
           </div>
         )
       case 'chat.request.rating':

@@ -11,6 +11,11 @@ class CardContainer extends Component {
 
   renderIcon() {
     const isString = typeof this.props.icon === 'string'
+
+    if (isString && this.props.icon === 'none') {
+      return null
+    }
+
     return <div className="card-icon">{!isString && this.props.icon}</div>
   }
 
