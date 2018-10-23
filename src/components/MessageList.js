@@ -9,7 +9,7 @@ import OfflineForm from 'components/OfflineForm'
 import PrechatForm from 'components/PrechatForm'
 import ChatRating from 'components/ChatRating'
 import PropTypes from 'prop-types'
-import { isTrigger } from 'utils'
+import { isAgent, isTrigger } from 'utils'
 
 class MessageList extends Component {
   constructor(props) {
@@ -52,7 +52,9 @@ class MessageList extends Component {
         return (
           <div key={msg.type + msg.timestamp}>
             <SystemMessage message={msg} />
-            <ChatRating agent={msg} />
+            {isAgent(msg.nick) && (
+              <ChatRating agent={msg} leaveAfterFeedback={true} />
+            )}
           </div>
         )
       case 'chat.request.rating':
@@ -104,15 +106,6 @@ class MessageList extends Component {
         member_type: 'agent',
         msg: 'Ciao sono Hype Bot e puoi chiedermi quello che vuoi!'
       })
-      // messages.push({
-      //   type: 'offline'
-      // });
-    } else if (!this.props.isChatting) {
-      messages = [
-        {
-          type: 'prechat'
-        }
-      ]
     }
 
     let prev = null

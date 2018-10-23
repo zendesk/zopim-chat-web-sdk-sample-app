@@ -10,6 +10,9 @@ import PropTypes from 'prop-types'
 class ChatRating extends Component {
   constructor(props) {
     super(props)
+
+    this.rateDown = this.rateDown.bind(this)
+    this.rateUp = this.rateUp.bind(this)
   }
 
   rateDown(event) {
@@ -18,6 +21,9 @@ class ChatRating extends Component {
       if (err) {
         log('Error occured >>>', err)
         return
+      }
+      if (this.props.leaveAfterFeedback) {
+        zChat.endChat()
       }
     })
   }
@@ -28,6 +34,10 @@ class ChatRating extends Component {
       if (err) {
         log('Error occured >>>', err)
         return
+      }
+
+      if (this.props.leaveAfterFeedback) {
+        zChat.endChat()
       }
     })
   }
@@ -56,7 +66,8 @@ class ChatRating extends Component {
 
 ChatRating.displayName = 'ChatRating'
 ChatRating.propTypes = {
-  agent: PropTypes.object
+  agent: PropTypes.object,
+  leaveAfterFeedback: PropTypes.bool
 }
 ChatRating.defaultProps = {}
 

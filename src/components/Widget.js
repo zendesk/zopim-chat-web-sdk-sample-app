@@ -7,7 +7,7 @@ import StatusContainer from 'components/StatusContainer'
 import MessageList from 'components/MessageList'
 import ChatButton from 'components/ChatButton'
 import Input from 'components/Input'
-import { log, get, set } from 'utils'
+import { log, get, set, isAgent } from 'utils'
 import { debounce } from 'lodash'
 import zChat from 'vendor/web-sdk'
 import qnaChat from '../sdk/qna-sdk'
@@ -95,11 +95,36 @@ class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (
-      !this.props.data.chatOperatorSettings &&
       this.props.data.connection !== 'connected' &&
       nextProps.data.connection === 'connected'
     ) {
-      this.getServicesStatus()
+      if (!this.props.data.chatbot.chatOperatorSettings) {
+        this.getServicesStatus()
+      }
+    } else if (
+      nextProps.data.connection === 'connected' &&
+      !nextProps.data.chatbot.active
+    ) {
+      /**
+       * enable this statement to activate the chatbot on agent leave
+       * despite the chat won't be closed until the feedback will be received
+       */
+      const [lastMessage] =
+        nextProps.data && nextProps.data.chats.toArray().slice(-1)
+
+      if (
+        !!lastMessage &&
+        isAgent(lastMessage.nick) &&
+        lastMessage.type === 'chat.memberleave'
+      ) {
+        nextProps.dispatch({
+          type: 'chat',
+          detail: {
+            type: 'chat.bot.settings',
+            active: true
+          }
+        })
+      }
     }
   }
 
