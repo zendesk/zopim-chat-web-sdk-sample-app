@@ -31,7 +31,7 @@ class MessageList extends Component {
     }
   }
 
-  renderByType(msg, addClass) {
+  renderByType(msg, agents, addClass) {
     switch (msg.type) {
       case 'chat.file':
       case 'chat.msg':
@@ -47,28 +47,42 @@ class MessageList extends Component {
       case 'chat.wait_queue':
       case 'typing':
       case 'chat.rating':
+      case 'chat.comment':
         return <SystemMessage key={msg.type + msg.timestamp} message={msg} />
       case 'chat.memberleave':
         return (
           <div key={msg.type + msg.timestamp}>
             <SystemMessage message={msg} />
-            {isAgent(msg.nick) && (
-              <ChatRating agent={msg} lastRating={this.props.lastRating} />
-            )}
+            {isAgent(msg.nick) &&
+              Object.keys(agents).length === 0 &&
+              !msg.hidden && (
+                <ChatRating
+                  agent={msg}
+                  lastRating={this.props.lastRating}
+                  lastComment={this.props.lastComment}
+                />
+              )}
           </div>
         )
       case 'chat.request.rating':
         return (
-          <ChatRating
-            agent={msg}
-            key={msg.type + msg.timestamp}
-            lastRating={this.props.lastRating}
-          />
+          !msg.hidden && (
+            <ChatRating
+              agent={msg}
+              key={msg.type + msg.timestamp}
+              lastRating={this.props.lastRating}
+              lastComment={this.props.lastComment}
+            />
+          )
         )
       case 'offline':
         return <OfflineForm title={msg.msg} key={msg.type + msg.timestamp} />
       case 'prechat':
-        return <PrechatForm title={msg.msg} key={msg.type + msg.timestamp} />
+        return (
+          !msg.hidden && (
+            <PrechatForm title={msg.msg} key={msg.type + msg.timestamp} />
+          )
+        )
       default:
         return (
           <div key={+new Date()}>Unhandled message: {JSON.stringify(msg)}</div>
@@ -98,7 +112,7 @@ class MessageList extends Component {
     })
   }
 
-  renderAll(isOffline, messages) {
+  renderAll(isOffline, messages, agents) {
     if (isOffline) {
       if (!messages) {
         messages = []
@@ -131,14 +145,20 @@ class MessageList extends Component {
 
       prev = message
 
-      return this.renderByType(message, addClass)
+      return this.renderByType(message, agents, addClass)
     })
   }
 
   render() {
     return (
       <div className="message-list-container">
-        <div>{this.renderAll(this.props.isOffline, this.props.messages)}</div>
+        <div>
+          {this.renderAll(
+            this.props.isOffline,
+            this.props.messages,
+            this.props.agents
+          )}
+        </div>
         {this.renderTyping(this.props.agents)}
       </div>
     )
@@ -151,7 +171,8 @@ MessageList.propTypes = {
   agents: PropTypes.object,
   isOffline: PropTypes.bool,
   isChatting: PropTypes.bool,
-  lastRating: PropTypes.string
+  lastRating: PropTypes.string,
+  lastComment: PropTypes.string
 }
 MessageList.defaultProps = {
   messages: [],

@@ -83,7 +83,10 @@ class ChatRating extends Component {
             </div>
             <div className="section">
               <label className="label">Messaggio</label>
-              <textarea ref={this.messageInput} />
+              <textarea
+                ref={this.messageInput}
+                defaultValue={this.props.lastComment}
+              />
             </div>
           </div>
           <div className="button-container">
@@ -102,7 +105,8 @@ class ChatRating extends Component {
 ChatRating.displayName = 'ChatRating'
 ChatRating.propTypes = {
   agent: PropTypes.object,
-  lastRating: PropTypes.string
+  lastRating: PropTypes.string,
+  lastComment: PropTypes.string
 }
 ChatRating.defaultProps = {}
 

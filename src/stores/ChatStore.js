@@ -2,6 +2,18 @@ import { log, isAgent, isTrigger, set } from 'utils'
 import { createStore } from 'redux'
 import SortedMap from 'collections/sorted-map'
 
+const hidePreviousRatingRequest = (chats, action) =>
+  chats.map(c => {
+    if (
+      (c.type === 'chat.request.rating' || c.type === 'chat.memberleave') &&
+      c.timestamp < action.detail.timestamp
+    ) {
+      c.hidden = true
+    }
+
+    return c
+  })
+
 const DEFAULT_STATE = {
   connection: 'closed',
   account_status: 'offline',
@@ -93,6 +105,9 @@ function update(state = DEFAULT_STATE, action) {
         case 'chat.memberleave':
           if (!isAgent(action.detail.nick)) {
             new_state.is_chatting = false
+          } else {
+            new_state.chats = hidePreviousRatingRequest(new_state.chats, action)
+            delete new_state.agents[action.detail.nick]
           }
 
           // Concat this event to chats to be displayed
@@ -107,9 +122,33 @@ function update(state = DEFAULT_STATE, action) {
         case 'chat.wait_queue':
         case 'chat.request.rating':
         case 'chat.rating':
+        case 'chat.comment':
         case 'chat.msg':
         case 'offline':
         case 'prechat':
+          if (
+            !isAgent(action.detail.nick) &&
+            action.detail.type === 'chat.msg'
+          ) {
+            new_state.chats = new_state.chats.map(c => {
+              if (c.type === 'prechat') {
+                c.hidden = true
+              }
+            })
+          }
+
+          if (action.detail.type === 'chat.request.rating') {
+            new_state.chats = hidePreviousRatingRequest(new_state.chats, action)
+          }
+          if (action.detail.type === 'chat.rating') {
+            new_state.chats = hidePreviousRatingRequest(new_state.chats, action)
+            new_state.last_chat_rating = action.detail.new_rating
+          }
+
+          if (action.detail.type === 'chat.comment') {
+            new_state.last_chat_comment = action.detail.new_comment
+          }
+
           // Ensure that triggers are uniquely identified by their display names
           if (isTrigger(action.detail.nick))
             action.detail.nick = `agent:trigger:${action.detail.display_name}`
@@ -119,10 +158,6 @@ function update(state = DEFAULT_STATE, action) {
               member_type: isAgent(action.detail.nick) ? 'agent' : 'visitor'
             }
           })
-
-          if (action.detail.type === 'chat.rating') {
-            new_state.last_chat_rating = action.detail.new_rating
-          }
 
           return new_state
         case 'typing':

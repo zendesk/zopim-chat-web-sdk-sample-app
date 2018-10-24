@@ -113,7 +113,8 @@ class App extends Component {
            */
           if (
             isAgent(lastMessage.nick) &&
-            lastMessage.type === 'chat.memberleave'
+            lastMessage.type === 'chat.memberleave' &&
+            Object.keys(nextProps.data.agents).length === 0
           ) {
             nextProps.dispatch({
               type: 'chat',
@@ -664,6 +665,7 @@ class App extends Component {
             agents={this.props.data.agents}
             entities={entities}
             lastRating={this.props.data.last_chat_rating}
+            lastComment={this.props.data.last_chat_comment}
           />
           <div
             className={`spinner-container ${
