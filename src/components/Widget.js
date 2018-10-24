@@ -155,22 +155,22 @@ class App extends Component {
     if (this.isOffline()) {
       this.textInput.current.getRawInput().value = ''
 
-      if (this.checkKeyword(msg)) {
-        this.handleRequestOperator(true)
-        return
-      }
-
       this.props.dispatch({
         type: 'chat',
         detail: {
           type: 'chat.msg',
-          nick: 'visitor:user',
+          nick: 'visitor:anonymous',
           display_name: 'Tu',
-          member_type: 'agent',
+          member_type: 'visitor',
           timestamp: +new Date(),
           msg
         }
       })
+
+      if (this.checkKeyword(msg)) {
+        this.handleRequestOperator(true)
+        return
+      }
 
       const { minConfidence } = this.props.data.chatbot
 
