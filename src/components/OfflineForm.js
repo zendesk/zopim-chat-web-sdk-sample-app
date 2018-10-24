@@ -59,16 +59,29 @@ class OfflineForm extends Component {
         </div>
       )
     } else {
+      const visitorInfo = zChat.getVisitorInfo()
       return (
         <form key="not-sent" className="offline-form">
           <div className="content">
             <div className="section">
               <label className="label">Nome e Cognome</label>
-              <input ref={this.nameInput} />
+              <input
+                ref={this.nameInput}
+                defaultValue={
+                  visitorInfo &&
+                  !/visitor\s\d+/i.test(visitorInfo.display_name) &&
+                  visitorInfo.display_name
+                    ? visitorInfo.display_name
+                    : ''
+                }
+              />
             </div>
             <div className="section">
               <label className="label">Email</label>
-              <input ref={this.emailInput} />
+              <input
+                ref={this.emailInput}
+                defaultValue={visitorInfo && visitorInfo.email}
+              />
             </div>
             <div className="section">
               <label className="label">Messaggio</label>
