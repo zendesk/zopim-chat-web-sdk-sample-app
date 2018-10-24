@@ -52,11 +52,19 @@ class MessageList extends Component {
         return (
           <div key={msg.type + msg.timestamp}>
             <SystemMessage message={msg} />
-            {isAgent(msg.nick) && <ChatRating agent={msg} />}
+            {isAgent(msg.nick) && (
+              <ChatRating agent={msg} lastRating={this.props.lastRating} />
+            )}
           </div>
         )
       case 'chat.request.rating':
-        return <ChatRating agent={msg} key={msg.type + msg.timestamp} />
+        return (
+          <ChatRating
+            agent={msg}
+            key={msg.type + msg.timestamp}
+            lastRating={this.props.lastRating}
+          />
+        )
       case 'offline':
         return <OfflineForm title={msg.msg} key={msg.type + msg.timestamp} />
       case 'prechat':
@@ -142,7 +150,8 @@ MessageList.propTypes = {
   messages: PropTypes.array,
   agents: PropTypes.object,
   isOffline: PropTypes.bool,
-  isChatting: PropTypes.bool
+  isChatting: PropTypes.bool,
+  lastRating: PropTypes.string
 }
 MessageList.defaultProps = {
   messages: [],

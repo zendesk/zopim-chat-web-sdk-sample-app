@@ -635,6 +635,7 @@ class App extends Component {
             messages={this.props.data && this.props.data.chats.toArray()}
             agents={this.props.data.agents}
             entities={entities}
+            lastRating={this.props.data.last_chat_rating}
           />
           <div
             className={`spinner-container ${

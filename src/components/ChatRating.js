@@ -13,7 +13,7 @@ class ChatRating extends Component {
     super(props)
 
     this.state = {
-      rating: null
+      rating: props.lastRating
     }
 
     this.messageInput = React.createRef()
@@ -101,7 +101,8 @@ class ChatRating extends Component {
 
 ChatRating.displayName = 'ChatRating'
 ChatRating.propTypes = {
-  agent: PropTypes.object
+  agent: PropTypes.object,
+  lastRating: PropTypes.string
 }
 ChatRating.defaultProps = {}
 

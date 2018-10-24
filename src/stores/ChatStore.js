@@ -119,6 +119,11 @@ function update(state = DEFAULT_STATE, action) {
               member_type: isAgent(action.detail.nick) ? 'agent' : 'visitor'
             }
           })
+
+          if (action.detail.type === 'chat.rating') {
+            new_state.last_chat_rating = action.detail.new_rating
+          }
+
           return new_state
         case 'typing':
           let agent = state.agents[action.detail.nick]
