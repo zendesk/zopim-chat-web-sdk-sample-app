@@ -104,52 +104,53 @@ class App extends Component {
     } else if (nextProps.data.connection === 'connected') {
       const [lastMessage] =
         nextProps.data && nextProps.data.chats.toArray().slice(-1)
-      if (!nextProps.data.chatbot.active) {
-        /**
-         * enable this statement to activate the chatbot on agent leave
-         * despite the chat won't be closed until the feedback will be received
-         */
-        if (
-          !!lastMessage &&
-          isAgent(lastMessage.nick) &&
-          lastMessage.type === 'chat.memberleave'
-        ) {
-          nextProps.dispatch({
-            type: 'chat',
-            detail: {
-              type: 'chat.bot.settings',
-              active: true
-            }
-          })
-        }
-      } else {
-        /**
-         * enable this statement to activate the chatbot on agent join
-         * despite the chat won't be closed until the feedback will be received
-         */
-        if (
-          !!lastMessage &&
-          isAgent(lastMessage.nick) &&
-          lastMessage.type === 'chat.memberjoin'
-        ) {
-          nextProps.dispatch({
-            type: 'chat',
-            detail: {
-              type: 'chat.bot.settings',
-              active: false
-            }
-          })
-        }
-      }
 
-      if (!this.state.visible) {
-        switch (lastMessage.type) {
-          case 'chat.file':
-          case 'chat.request.rating':
-          case 'chat.msg':
-            if (isAgent(lastMessage.nick)) {
-              this.setVisible(true)
-            }
+      if (!!lastMessage) {
+        if (!nextProps.data.chatbot.active) {
+          /**
+           * enable this statement to activate the chatbot on agent leave
+           * despite the chat won't be closed until the feedback will be received
+           */
+          if (
+            isAgent(lastMessage.nick) &&
+            lastMessage.type === 'chat.memberleave'
+          ) {
+            nextProps.dispatch({
+              type: 'chat',
+              detail: {
+                type: 'chat.bot.settings',
+                active: true
+              }
+            })
+          }
+        } else {
+          /**
+           * enable this statement to activate the chatbot on agent join
+           * despite the chat won't be closed until the feedback will be received
+           */
+          if (
+            isAgent(lastMessage.nick) &&
+            lastMessage.type === 'chat.memberjoin'
+          ) {
+            nextProps.dispatch({
+              type: 'chat',
+              detail: {
+                type: 'chat.bot.settings',
+                active: false
+              }
+            })
+          }
+        }
+
+        if (!this.state.visible) {
+          switch (lastMessage.type) {
+            case 'chat.file':
+            case 'chat.request.rating':
+            case 'chat.msg':
+              if (isAgent(lastMessage.nick)) {
+                this.setVisible(true)
+              }
+          }
         }
       }
     }
