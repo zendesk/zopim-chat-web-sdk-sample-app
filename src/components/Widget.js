@@ -141,6 +141,17 @@ class App extends Component {
           })
         }
       }
+
+      if (!this.state.visible) {
+        switch (lastMessage.type) {
+          case 'chat.file':
+          case 'chat.request.rating':
+          case 'chat.msg':
+            if (isAgent(lastMessage.nick)) {
+              this.setVisible(true)
+            }
+        }
+      }
     }
   }
 
