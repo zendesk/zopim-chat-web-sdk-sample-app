@@ -101,29 +101,45 @@ class App extends Component {
       if (!this.props.data.chatbot.chatOperatorSettings) {
         this.getServicesStatus()
       }
-    } else if (
-      nextProps.data.connection === 'connected' &&
-      !nextProps.data.chatbot.active
-    ) {
-      /**
-       * enable this statement to activate the chatbot on agent leave
-       * despite the chat won't be closed until the feedback will be received
-       */
+    } else if (nextProps.data.connection === 'connected') {
       const [lastMessage] =
         nextProps.data && nextProps.data.chats.toArray().slice(-1)
-
-      if (
-        !!lastMessage &&
-        isAgent(lastMessage.nick) &&
-        lastMessage.type === 'chat.memberleave'
-      ) {
-        nextProps.dispatch({
-          type: 'chat',
-          detail: {
-            type: 'chat.bot.settings',
-            active: true
-          }
-        })
+      if (!nextProps.data.chatbot.active) {
+        /**
+         * enable this statement to activate the chatbot on agent leave
+         * despite the chat won't be closed until the feedback will be received
+         */
+        if (
+          !!lastMessage &&
+          isAgent(lastMessage.nick) &&
+          lastMessage.type === 'chat.memberleave'
+        ) {
+          nextProps.dispatch({
+            type: 'chat',
+            detail: {
+              type: 'chat.bot.settings',
+              active: true
+            }
+          })
+        }
+      } else {
+        /**
+         * enable this statement to activate the chatbot on agent join
+         * despite the chat won't be closed until the feedback will be received
+         */
+        if (
+          !!lastMessage &&
+          isAgent(lastMessage.nick) &&
+          lastMessage.type === 'chat.memberjoin'
+        ) {
+          nextProps.dispatch({
+            type: 'chat',
+            detail: {
+              type: 'chat.bot.settings',
+              active: false
+            }
+          })
+        }
       }
     }
   }
