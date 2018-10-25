@@ -591,6 +591,10 @@ class App extends Component {
   }
 
   setVisible(visible) {
+    if (this.props.visible !== null) {
+      visible = this.props.visible
+    }
+
     this.setState({
       visible
     })

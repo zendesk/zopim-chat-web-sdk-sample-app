@@ -6,6 +6,14 @@ import { Provider } from 'react-redux'
 import ChatStore from 'stores/ChatStore'
 
 export default class ChatWidget extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      visible: null
+    }
+  }
+
   static init = ({ selector = 'widget' } = {}) => {
     let widget = document.getElementById(selector)
 
@@ -19,14 +27,16 @@ export default class ChatWidget extends Component {
     return ReactDOM.render(<ChatWidget />, widget)
   }
 
-  foo() {
-    window.console.log('asdasd')
+  toggle(visible) {
+    this.setState({
+      visible
+    })
   }
 
   render() {
     return (
       <Provider store={ChatStore}>
-        <Widget />
+        <Widget visible={this.state.visible} />
       </Provider>
     )
   }
