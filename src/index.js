@@ -27,6 +27,10 @@ export default class ChatWidget extends Component {
     this.child.setVisible(visible)
   }
 
+  setVisitorInfo(info) {
+    this.child.setVisitorInfo(info)
+  }
+
   render() {
     return (
       <Provider store={ChatStore}>

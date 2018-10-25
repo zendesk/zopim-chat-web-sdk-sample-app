@@ -178,6 +178,12 @@ class App extends Component {
     this.setState({ typing: false })
   }
 
+  setVisitorInfo(info) {
+    zChat.setVisitorInfo(info, err => {
+      if (err) log('Error setting visitor info')
+    })
+  }
+
   handleOnSubmit(event) {
     event && event.preventDefault()
 
