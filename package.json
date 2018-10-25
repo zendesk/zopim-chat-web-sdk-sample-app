@@ -1,9 +1,12 @@
 {
   "name": "@hype/chat-widget",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.1-alpha.1",
   "description": "Zopim + QnA Chat Web Widget (React)",
-  "main": "",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "clean": "rimraf dist/*",
     "copy": "copyfiles -f ./src/index.html ./dist",
