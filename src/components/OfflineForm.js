@@ -103,16 +103,20 @@ class OfflineForm extends Component {
   render() {
     return (
       <CardContainer
-        title={this.props.title}
+        title={this.state.sent ? 'Messaggio inviato.' : this.props.title}
         addClass="offline-card"
         contentAddClass={this.state.sent ? 'sent' : ''}
         icon={<MessageSvg />}
       >
-        <div className="offline-subtitle">{this.props.subTitle}</div>
-        <div className="offline-caption">
-          Se lo desideri, puoi comunque scriverci un messaggio, ti risponderemo
-          entro 24 ore dall'invio.
-        </div>
+        {!this.state.sent && (
+          <div>
+            <div className="offline-subtitle">{this.props.subTitle}</div>
+            <div className="offline-caption">
+              Se lo desideri, puoi comunque scriverci un messaggio, ti
+              risponderemo entro 24 ore dall'invio.
+            </div>
+          </div>
+        )}
         <ReactCSSTransitionGroup
           className="offline-container"
           transitionName={this.state.sent ? 'offline-shrink' : 'offline-grow'}
