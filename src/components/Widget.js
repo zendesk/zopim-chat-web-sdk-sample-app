@@ -345,11 +345,8 @@ class App extends Component {
           member_type: 'agent',
           timestamp: +new Date(),
           msg: `${
-            !intentional
-              ? 'Non riesco a rispondere alla tua domanda. Vuoi essere messo in contatto con un operatore?'
-              : ''
-          }
-                    Presentati!`
+            !intentional ? 'Non riesco a rispondere alla tua domanda. ' : ''
+          }Vuoi essere messo in contatto con un operatore? Presentati!`
         }
       })
     } else {
@@ -361,9 +358,13 @@ class App extends Component {
           display_name: 'Hype Bot',
           member_type: 'agent',
           timestamp: +new Date(),
-          msg: `Non riesco a rispondere alla tua domanda e al momento non ci sono operatori disponibili.
-                   Puoi chattare con un operatore dal Lunedì al Venerdì, esclusi i festivi,
-                   ${this.getOperatorAvailabilityString()}. Se vuoi contattarci in orari e giorni diversi scrivi qui sotto i tuoi dati e il tuo messaggio, un operatore ti risponderà al più presto via email quando tornerà online.`
+          msg: `${
+            !intentional
+              ? 'Non riesco a rispondere alla tua domanda e al momento non ci sono operatori disponibili.'
+              : 'Al momento non ci sono operatori disponibili.'
+          }`,
+          subMsg: `Puoi chattare con un operatore dal Lunedì al Venerdì, esclusi i festivi,
+                   ${this.getOperatorAvailabilityString()}.`
         }
       })
     }

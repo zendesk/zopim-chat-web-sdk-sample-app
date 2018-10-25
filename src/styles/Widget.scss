@@ -321,7 +321,7 @@ svg {
       margin-top: -2px;
       border-top: 4px solid transparent;
       border-bottom: 4px solid transparent;
-      border-right: 4px solid rgb(204, 237, 255);
+      border-right: 4px solid rgba($theme-color, .2);
     }
 
     .agent.bot & {
@@ -330,7 +330,7 @@ svg {
       margin-top: -2px;
       border-top: 4px solid transparent;
       border-bottom: 4px solid transparent;
-      border-right: 4px solid rgb(204, 237, 255);
+      border-right: 4px solid rgba($theme-color, .2);
       // border-right: 4px solid #DDDDDD;
     }
 
@@ -361,11 +361,11 @@ svg {
     }
 
     .agent & {
-        background: rgb(204, 237, 255);
+        background: rgba($theme-color, .2);
     }
 
     .bot & {
-        background: rgb(204, 237, 255);
+        background: rgba($theme-color, .2);
         // border: 1px solid #DDDDDD;
         // background: #FFFFFF;
     }
@@ -410,7 +410,7 @@ svg {
 
     .agent & {
         left: 10px;
-        background-color: #03A9F4;
+        background-color: $theme-color;
     }
 
     .visitor & {
@@ -585,6 +585,23 @@ svg {
         background-color: $theme-color;
         color: #FFF;
     }
+}
+
+.offline-subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 8px;
+    font-style: italic;
+    margin-bottom: 8px;
+}
+
+.offline-caption {
+    text-align: center;
+    color: #555;
+    margin-bottom: 8px;
+    font-style: italic;
+    font-weight: bold;
+    margin-bottom: 8px;
 }
 
 .action-button {

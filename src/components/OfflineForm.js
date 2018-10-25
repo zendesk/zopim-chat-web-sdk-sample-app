@@ -108,6 +108,11 @@ class OfflineForm extends Component {
         contentAddClass={this.state.sent ? 'sent' : ''}
         icon={<MessageSvg />}
       >
+        <div className="offline-subtitle">{this.props.subTitle}</div>
+        <div className="offline-caption">
+          Se lo desideri, puoi comunque scriverci un messaggio, ti risponderemo
+          entro 24 ore dall'invio.
+        </div>
         <ReactCSSTransitionGroup
           className="offline-container"
           transitionName={this.state.sent ? 'offline-shrink' : 'offline-grow'}
@@ -125,7 +130,8 @@ OfflineForm.displayName = 'OfflineForm'
 OfflineForm.propTypes = {
   onClick: PropTypes.func,
   addClass: PropTypes.string,
-  title: PropTypes.string
+  title: PropTypes.string,
+  subTitle: PropTypes.string
 }
 
 export default OfflineForm
