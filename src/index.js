@@ -16,12 +16,7 @@ export default class ChatWidget extends Component {
     }
 
     // Render the main component into the dom
-    return ReactDOM.render(
-      <Provider store={ChatStore}>
-        <Widget />
-      </Provider>,
-      widget
-    )
+    return ReactDOM.render(<ChatWidget />, widget)
   }
 
   foo() {
@@ -29,7 +24,11 @@ export default class ChatWidget extends Component {
   }
 
   render() {
-    return <Widget />
+    return (
+      <Provider store={ChatStore}>
+        <Widget />
+      </Provider>
+    )
   }
 }
 
