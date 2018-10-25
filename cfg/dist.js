@@ -30,8 +30,8 @@ const config = Object.assign({}, baseConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin([
       {
-        from: 'assets/fonts/**/*',
-        to: 'assets/fonts',
+        from: 'src/assets/fonts/**/*',
+        to: 'fonts',
         flatten: true
       }
     ])
