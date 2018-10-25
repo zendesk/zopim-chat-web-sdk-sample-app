@@ -15,4 +15,8 @@ export function isTrigger(nick) {
   return nick.startsWith('agent:trigger')
 }
 
+export function anyHumanAgent(agents) {
+  return Object.keys(agents).filter(k => !isTrigger(agents[k].nick)).length > 0
+}
+
 export * from './PersistentStorage'

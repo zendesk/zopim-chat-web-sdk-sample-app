@@ -7,7 +7,7 @@ import StatusContainer from 'components/StatusContainer'
 import MessageList from 'components/MessageList'
 import ChatButton from 'components/ChatButton'
 import Input from 'components/Input'
-import { log, get, set, isAgent } from 'utils'
+import { log, get, set, isAgent, anyHumanAgent } from 'utils'
 import { debounce } from 'lodash'
 import zChat from 'vendor/web-sdk'
 import qnaChat from '../sdk/qna-sdk'
@@ -114,7 +114,7 @@ class App extends Component {
           if (
             isAgent(lastMessage.nick) &&
             lastMessage.type === 'chat.memberleave' &&
-            Object.keys(nextProps.data.agents).length === 0
+            !anyHumanAgent(nextProps.data.agents)
           ) {
             nextProps.dispatch({
               type: 'chat',
@@ -203,6 +203,15 @@ class App extends Component {
 
       const { minConfidence } = this.props.data.chatbot
 
+      this.props.dispatch({
+        type: 'chat',
+        detail: {
+          type: 'typing',
+          nick: 'agent:trigger:Hype Bot',
+          typing: true
+        }
+      })
+
       qnaChat
         .sendChatMsg(msg)
         .then(json => {
@@ -241,6 +250,16 @@ class App extends Component {
             log('Error occured >>>', err)
             return
           }
+        })
+        .finally(() => {
+          this.props.dispatch({
+            type: 'chat',
+            detail: {
+              type: 'typing',
+              nick: 'agent:trigger:Hype Bot',
+              typing: false
+            }
+          })
         })
 
       return
@@ -440,6 +459,23 @@ class App extends Component {
 
         const clientTime = new Date()
 
+        const isBotActive =
+          get('chatbotActive') === undefined
+            ? this.isServiceActive(chatBotSettings)
+            : get('chatbotActive')
+
+        if (isBotActive) {
+          this.props.dispatch({
+            type: 'agent_update',
+            detail: {
+              display_name: 'Hype Bot',
+              nick: 'agent:trigger:Hype Bot',
+              member_type: 'agent',
+              bot: true
+            }
+          })
+        }
+
         this.props.dispatch({
           type: 'chat',
           detail: {
@@ -447,10 +483,7 @@ class App extends Component {
             chatOperatorSettings,
             serverToClientTimeSpan:
               moment(json.serverTime).valueOf() - clientTime.getTime(),
-            active:
-              get('chatbotActive') === undefined
-                ? this.isServiceActive(chatBotSettings)
-                : get('chatbotActive'),
+            active: isBotActive,
             minConfidence: Number(chatBotSettings.addtInfo),
             keywords
           }

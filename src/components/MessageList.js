@@ -9,7 +9,7 @@ import OfflineForm from 'components/OfflineForm'
 import PrechatForm from 'components/PrechatForm'
 import ChatRating from 'components/ChatRating'
 import PropTypes from 'prop-types'
-import { isAgent, isTrigger } from 'utils'
+import { isAgent, isTrigger, anyHumanAgent } from 'utils'
 
 class MessageList extends Component {
   constructor(props) {
@@ -54,7 +54,7 @@ class MessageList extends Component {
           <div key={msg.type + msg.timestamp}>
             <SystemMessage message={msg} />
             {isAgent(msg.nick) &&
-              Object.keys(agents).length === 0 &&
+              !anyHumanAgent(agents) &&
               !msg.hidden && (
                 <ChatRating
                   agent={msg}
