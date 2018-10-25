@@ -1,4 +1,3 @@
-import '@babel/polyfill'
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Widget from 'components/Widget'
@@ -41,5 +40,6 @@ export default class ChatWidget extends Component {
 }
 
 if (process.env.SCOPE === 'demo') {
+  require('@babel/polyfill')
   window.onload = ChatWidget.init
 }
