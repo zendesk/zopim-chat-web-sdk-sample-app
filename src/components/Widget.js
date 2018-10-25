@@ -669,7 +669,9 @@ class App extends Component {
           />
           <div
             className={`spinner-container ${
-              this.state.visible && this.props.data.connection !== 'connected'
+              this.state.visible &&
+              (this.props.data.connection !== 'connected' ||
+                !this.props.data.chatbot.chatOperatorSettings)
                 ? 'visible'
                 : ''
             }`}
