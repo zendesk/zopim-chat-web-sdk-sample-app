@@ -17,6 +17,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/../dist/assets'),
     filename: 'widget.js',
+    library: 'ChatWidget',
+    libraryTarget: 'umd',
     publicPath: defaultSettings.publicPath
   },
   devServer: {

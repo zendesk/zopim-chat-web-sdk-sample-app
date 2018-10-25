@@ -16,7 +16,7 @@ export default class ChatWidget extends Component {
     }
 
     // Render the main component into the dom
-    ReactDOM.render(
+    return ReactDOM.render(
       <Provider store={ChatStore}>
         <Widget />
       </Provider>,
