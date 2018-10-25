@@ -6,6 +6,7 @@ const webpack = require('webpack')
 const baseConfig = require('./base')
 const defaultSettings = require('./defaults')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const config = Object.assign({}, baseConfig, {
   entry: path.join(__dirname, '../src/index'),
@@ -26,7 +27,14 @@ const config = Object.assign({}, baseConfig, {
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: 'assets/fonts/**/*',
+        to: 'assets/fonts',
+        flatten: true
+      }
+    ])
   ],
   optimization: {
     minimizer: [
