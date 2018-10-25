@@ -6,12 +6,12 @@ import { Provider } from 'react-redux'
 import ChatStore from 'stores/ChatStore'
 
 export default class ChatWidget extends Component {
-  static init = () => {
-    let widget = document.getElementById('widget')
+  static init = ({ selector = 'widget' }) => {
+    let widget = document.getElementById(selector)
 
     if (!widget) {
       widget = document.createElement('div')
-      widget.id = 'widget'
+      widget.id = selector
       document.body.appendChild(widget)
     }
 
@@ -24,9 +24,15 @@ export default class ChatWidget extends Component {
     )
   }
 
+  foo() {
+    window.console.log('asdasd')
+  }
+
   render() {
     return <Widget />
   }
 }
 
-window.onload = ChatWidget.init
+if (process.env.NODE_ENV === 'development') {
+  window.onload = ChatWidget.init
+}
