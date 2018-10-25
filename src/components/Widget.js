@@ -54,6 +54,8 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.props.onRef(this)
+
     qnaChat.init({
       account_key: BOT_ACCOUNT_KEY,
       endpoint: BOT_ENDPOINT,
@@ -91,6 +93,10 @@ class App extends Component {
       visible: get('visible') || this.state.visible,
       theme: get('theme') || this.state.theme
     })
+  }
+
+  componentWillUnmount() {
+    this.props.onRef(undefined)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -591,10 +597,6 @@ class App extends Component {
   }
 
   setVisible(visible) {
-    if (this.props.visible !== null) {
-      visible = this.props.visible
-    }
-
     this.setState({
       visible
     })

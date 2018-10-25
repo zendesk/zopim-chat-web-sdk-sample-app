@@ -8,10 +8,6 @@ import ChatStore from 'stores/ChatStore'
 export default class ChatWidget extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      visible: null
-    }
   }
 
   static init = ({ selector = 'widget' } = {}) => {
@@ -27,21 +23,19 @@ export default class ChatWidget extends Component {
     return ReactDOM.render(<ChatWidget />, widget)
   }
 
-  toggle(visible) {
-    this.setState({
-      visible
-    })
+  setVisible(visible) {
+    this.child.setVisible(visible)
   }
 
   render() {
     return (
       <Provider store={ChatStore}>
-        <Widget visible={this.state.visible} />
+        <Widget onRef={ref => (this.child = ref)} />
       </Provider>
     )
   }
 }
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.SCOPE === 'demo') {
   window.onload = ChatWidget.init
 }
