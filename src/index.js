@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import ChatStore from 'stores/ChatStore'
 
 export default class ChatWidget extends Component {
-  static init = ({ selector = 'widget' }) => {
+  static init = ({ selector = 'widget' } = {}) => {
     let widget = document.getElementById(selector)
 
     if (!widget) {
