@@ -256,16 +256,7 @@ class App extends Component {
           } else {
             this.handleRequestOperator()
           }
-          return json
-        })
-        .catch(err => {
-          this.textInput.current.getRawInput().value = ''
-          if (err) {
-            log('Error occured >>>', err)
-          }
-          return
-        })
-        .finally(() => {
+
           this.props.dispatch({
             type: 'chat',
             detail: {
@@ -274,6 +265,23 @@ class App extends Component {
               typing: false
             }
           })
+
+          return json
+        })
+        .catch(err => {
+          this.textInput.current.getRawInput().value = ''
+          if (err) {
+            log('Error occured >>>', err)
+
+            this.props.dispatch({
+              type: 'chat',
+              detail: {
+                type: 'typing',
+                nick: 'agent:trigger:Hype Bot',
+                typing: false
+              }
+            })
+          }
           return
         })
 
