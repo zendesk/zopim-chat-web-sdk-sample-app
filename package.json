@@ -1,6 +1,6 @@
 {
   "name": "@hype/chat-widget",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "license": "MIT",
   "description": "Zopim + QnA Chat Web Widget (React)",
   "main": "dist/index.js",
