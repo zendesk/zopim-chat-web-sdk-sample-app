@@ -256,13 +256,14 @@ class App extends Component {
           } else {
             this.handleRequestOperator()
           }
+          return json
         })
         .catch(err => {
           this.textInput.current.getRawInput().value = ''
           if (err) {
             log('Error occured >>>', err)
-            return
           }
+          return
         })
         .finally(() => {
           this.props.dispatch({
@@ -273,6 +274,7 @@ class App extends Component {
               typing: false
             }
           })
+          return
         })
 
       return
