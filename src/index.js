@@ -47,6 +47,6 @@ ChatWidget.propTypes = {
 
 export default ChatWidget
 
-if (process.env.SCOPE === 'demo') {
-  window.onload = ChatWidget.init
-}
+// if (process.env.SCOPE === 'demo') {
+//   window.onload = ChatWidget.init
+// }
