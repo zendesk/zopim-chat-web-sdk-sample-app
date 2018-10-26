@@ -505,6 +505,7 @@ class App extends Component {
           }
         })
       }
+      return json
     })
   }
 
