@@ -11,7 +11,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const config = Object.assign({}, baseConfig, {
   entry: path.join(__dirname, '../src/index'),
   cache: false,
-  mode: 'production',
+  mode: 'development',
   devtool: 'sourcemap',
   plugins: [
     new webpack.DefinePlugin({
