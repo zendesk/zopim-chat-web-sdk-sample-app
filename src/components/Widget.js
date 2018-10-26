@@ -402,8 +402,8 @@ class App extends Component {
 
               return {
                 ...template,
-                startTime: startT.toLocaleTimeString().replace(/\:\d\d$/, ''),
-                endTime: endT.toLocaleTimeString().replace(/\:\d\d$/, ''),
+                startTime: startT.toTimeString().replace(/(\d+\:\d+).*/, '$1'),
+                endTime: endT.toTimeString().replace(/(\d+\:\d+).*/, '$1'),
                 status: zChatOperatorSettings.enabled ? 'ACTIVE' : 'INACTIVE'
               }
             }
@@ -419,8 +419,8 @@ class App extends Component {
             return [
               {
                 ...template,
-                startTime: startT.toLocaleTimeString().replace(/\:\d\d$/, ''),
-                endTime: endT.toLocaleTimeString().replace(/\:\d\d$/, ''),
+                startTime: startT.toTimeString().replace(/(\d+\:\d+).*/, '$1'),
+                endTime: endT.toTimeString().replace(/(\d+\:\d+).*/, '$1'),
                 status: zChatOperatorSettings.enabled ? 'ACTIVE' : 'INACTIVE'
               }
             ]
@@ -437,8 +437,8 @@ class App extends Component {
       return [
         {
           ...template,
-          startTime: startT.toLocaleTimeString().replace(/\:\d\d$/, ''),
-          endTime: endT.toLocaleTimeString().replace(/\:\d\d$/, '')
+          startTime: startT.toTimeString().replace(/(\d+\:\d+).*/, '$1'),
+          endTime: endT.toTimeString().replace(/(\d+\:\d+).*/, '$1')
         }
       ]
     })(new Date(), new Date())
