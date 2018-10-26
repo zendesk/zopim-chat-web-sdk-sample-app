@@ -1,1 +1,84 @@
-$theme-color: #376ea5;
+@import 'settings/_colors';
+
+$theme-color: $tim-theme-color;
+
+.chat-button {
+    background-color: $theme-color;
+}
+
+.send-button {
+    background-color: $theme-color;
+}
+
+.rating-button.selected {
+    background-color: $theme-color;
+}
+
+.upload-button {
+    background-color: $theme-color;
+}
+
+.message-svg {
+    path {
+        fill: $theme-color;
+    }
+}
+
+.status-container {
+    background-color: $theme-color;
+}
+
+.agent .chat-msg-arrow {
+  border-right: 4px solid rgba($theme-color, .2);
+}
+
+.agent.bot .chat-msg-arrow {
+  border-right: 4px solid rgba($theme-color, .2);
+}
+
+.agent .chat-msg {
+    background: rgba($theme-color, .2);
+}
+
+.bot .chat-msg {
+    background: rgba($theme-color, .2);
+    // border: 1px solid #DDDDDD;
+    // background: #FFFFFF;
+}
+
+.agent .avatar {
+    left: 10px;
+    background-color: $theme-color;
+}
+
+.visitor .avatar {
+    right: 10px;
+    background-color: $theme-color;
+}
+
+.card-title {
+    color: $theme-color;
+}
+
+.offline-form {
+
+    .label {
+        display: block;
+        margin-bottom: 4px;
+        color: $theme-color;
+    }
+
+    .button-send {
+        background-color: $theme-color;
+    }
+}
+
+.offline-sent {
+    .button-resend {
+        background-color: $theme-color;
+    }
+}
+
+.spinner {
+    background-color: $theme-color;
+}

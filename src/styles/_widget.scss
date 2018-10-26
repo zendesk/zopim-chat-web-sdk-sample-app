@@ -557,20 +557,6 @@ svg {
     }
 }
 
-@keyframes typing-animation {
-    0% {
-        transform: translateY(0px)
-    }
-
-    28% {
-        transform: translateY(-5px)
-    }
-
-    44% {
-        transform: translateY(0px)
-    }
-}
-
 .typing-indicator-part:nth-child(1) {
     animation-delay: 200ms
 }
@@ -587,71 +573,6 @@ svg {
     display: inline-block;
     color: #555;
     animation: typing-animation 1.5s infinite ease-in-out;
-}
-
-@keyframes widget-show {
-  0% {
-    visibility: hidden;
-    opacity: 0;
-  }
-  1% {
-    visibility: visible;
-    opacity: 0;
-    transform: translateY(50%);
-  }
-  100% {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes widget-hide {
-  0% {
-    transform: translateY(0);
-  }
-  99% {
-    opacity: 0;
-    transform: translateY(50%);
-  }
-  100% {
-    visibility: hidden;
-    opacity: 0;
-  }
-}
-
-@keyframes widget-show-grow {
-  0% {
-    visibility: hidden;
-    opacity: 0;
-  }
-  1% {
-    visibility: visible;
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  100% {
-    visibility: visible;
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes widget-hide-shrink {
-  0% {
-    visibility: visible;
-    opacity: 1;
-    transform: scale(1);
-  }
-  99% {
-    visibility: visible;
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  100% {
-    visibility: hidden;
-    opacity: 0;
-  }
 }
 
 .spinner-container {
@@ -682,24 +603,4 @@ svg {
     border-radius: 100%;
     -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
     animation: sk-scaleout 1.0s infinite ease-in-out;
-}
-
-@-webkit-keyframes sk-scaleout {
-    0% {
-        transform: scale(0)
-    }
-    100% {
-        transform: scale(1.0);
-        opacity: 0;
-    }
-}
-
-@keyframes sk-scaleout {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1.0);
-        opacity: 0;
-    }
 }

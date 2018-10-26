@@ -1,3 +1,5 @@
+import 'styles/Widget.scss'
+
 import config from 'config'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
@@ -10,6 +12,7 @@ import { debounce } from 'lodash'
 import zChat from 'vendor/web-sdk'
 import qnaChat from '../sdk/qna-sdk'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 // import Holidays from 'date-holidays'
 
 const {
@@ -693,7 +696,7 @@ class App extends Component {
     const isOffline = this.isOffline()
 
     return (
-      <div className="index">
+      <div className={`index ${this.props.theme}`}>
         <div
           className={`widget-container ${this.getTheme()} ${this.getVisibilityClass()}`}
         >
@@ -742,6 +745,10 @@ class App extends Component {
 }
 
 App.displayName = 'App'
+
+App.propTypes = {
+  theme: PropTypes.string
+}
 
 const mapStateToProps = state => {
   return {
