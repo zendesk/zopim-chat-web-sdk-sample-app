@@ -9,7 +9,7 @@ export default class ChatWidget extends Component {
     super(props)
   }
 
-  static init = ({ selector = 'widget' } = {}) => {
+  static init = ({ selector = 'widget', theme = 'hype' } = {}) => {
     let widget = document.getElementById(selector)
 
     if (!widget) {
@@ -17,6 +17,8 @@ export default class ChatWidget extends Component {
       widget.id = selector
       document.body.appendChild(widget)
     }
+
+    require(`styles/Widget-${theme}.scss`)
 
     // Render the main component into the dom
     return ReactDOM.render(<ChatWidget />, widget)

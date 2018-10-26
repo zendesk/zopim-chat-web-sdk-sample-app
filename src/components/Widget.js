@@ -1,5 +1,3 @@
-import 'styles/Widget.scss'
-
 import config from 'config'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
