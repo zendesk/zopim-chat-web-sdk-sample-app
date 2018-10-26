@@ -22,7 +22,8 @@ const config = Object.assign({}, baseConfig, {
         EMAIL_ADDRESS: JSON.stringify(process.env.EMAIL_ADDRESS),
         SERVICES_CHECK_URL: JSON.stringify(process.env.SERVICES_CHECK_URL),
         BABEL_ENV: JSON.stringify('production'),
-        NODE_ENV: JSON.stringify('production')
+        NODE_ENV: JSON.stringify('production'),
+        SCOPE: JSON.stringify(process.env.SCOPE)
       }
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
