@@ -715,6 +715,7 @@ class App extends Component {
             entities={entities}
             lastRating={this.props.data.last_chat_rating}
             lastComment={this.props.data.last_chat_comment}
+            queuePosition={this.props.data.queue_position}
           />
           <div
             className={`spinner-container ${

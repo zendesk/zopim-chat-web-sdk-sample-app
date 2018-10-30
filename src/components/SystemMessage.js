@@ -22,9 +22,21 @@ class SystemMessage extends Component {
       case 'chat.memberleave':
         return this._parseMessage(msg, 1, 'uscito dalla chat')
       case 'chat.wait_queue':
-        return `Attendere prego. Attualmente ${
-          msg.wait_queue > 1 ? 'ci sono' : "c'è"
-        } ${msg.wait_queue} person${msg.wait_queue > 1 ? 'e' : 'a'} in coda.`
+        if (msg.wait_queue > 0) {
+          if (msg.wait_queue === 1) {
+            return `Attendere prego. Attualmente sei il primo in coda.`
+          }
+
+          const wait_queue_helper = msg.wait_queue - 1
+
+          return `Attendere prego. Attualmente ${
+            wait_queue_helper > 1
+              ? `ci sono altre ${wait_queue_helper}`
+              : "c'è un'altra"
+          } person${wait_queue_helper > 1 ? 'e' : 'a'} in coda.`
+        } else {
+          return ''
+        }
       case 'chat.rating':
         return this._parseMessage(
           msg,

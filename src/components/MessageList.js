@@ -44,7 +44,7 @@ class MessageList extends Component {
           />
         )
       case 'chat.memberjoin':
-      case 'chat.wait_queue':
+      // case 'chat.wait_queue':
       case 'typing':
       case 'chat.rating':
       case 'chat.comment':
@@ -89,6 +89,9 @@ class MessageList extends Component {
             <PrechatForm title={msg.msg} key={msg.type + msg.timestamp} />
           )
         )
+      case 'chat.wait_queue':
+      case 'chat.queue_position':
+        return null
       default:
         return (
           <div key={+new Date()}>Unhandled message: {JSON.stringify(msg)}</div>
@@ -166,6 +169,15 @@ class MessageList extends Component {
           )}
         </div>
         {this.renderTyping(this.props.agents)}
+        {this.props.queuePosition && this.props.queuePosition > 0 ? (
+          <SystemMessage
+            message={{
+              type: 'chat.wait_queue',
+              nick: 'system.queue',
+              wait_queue: this.props.queuePosition
+            }}
+          />
+        ) : null}
       </div>
     )
   }
@@ -178,7 +190,8 @@ MessageList.propTypes = {
   isOffline: PropTypes.bool,
   isChatting: PropTypes.bool,
   lastRating: PropTypes.string,
-  lastComment: PropTypes.string
+  lastComment: PropTypes.string,
+  queuePosition: PropTypes.number
 }
 MessageList.defaultProps = {
   messages: [],
