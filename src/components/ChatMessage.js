@@ -64,7 +64,7 @@ class ChatMessage extends Component {
 
   parseMessage(msg) {
     return msg.replace(
-      /(?:<a[^"']+href=["']|\[[^\]]+\]\()?((https?:\/\/|s?ftp:\/\/)?([a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/.*)?))(?:["'>][^<]+<\/a>|\))?/gi,
+      /(?:<a[^"']+href=["']|\[[^\]]+\]\()?((https?:\/\/|s?ftp:\/\/)?([a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/[^\s]*)?))(?:["'>][^<]+<\/a>|\))?/gi,
       this.replaceLinksInMessage
     )
   }
@@ -88,7 +88,8 @@ class ChatMessage extends Component {
       linkText = match.replace(markdownLinkRegex, '$1')
     }
 
-    return `<a href="${protocol || '//'}${url}" target="_blank">${linkText}</a>`
+    return `<b><a href="${protocol ||
+      '//'}${url}" target="_blank">${linkText}</a></b>`
   }
 
   renderMessagePart(msg) {
