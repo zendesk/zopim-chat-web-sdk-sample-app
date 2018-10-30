@@ -46,6 +46,10 @@ $theme-color: $hype-theme-color;
     // background: #FFFFFF;
 }
 
+.avatar {
+  position: static;
+}
+
 .agent .avatar {
     left: 10px;
     background-color: $theme-color;
