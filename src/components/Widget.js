@@ -15,16 +15,7 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 // import Holidays from 'date-holidays'
 
-const {
-  ENV,
-  ACCOUNT_KEY,
-  BOT_ACCOUNT_KEY,
-  BOT_ENDPOINT,
-  // EMAIL_ADDRESS,
-  SERVICES_CHECK_URL,
-  KEYWORDS,
-  THEME
-} = config
+const { ENV, THEME } = config
 
 if (ENV === 'dev') {
   window.zChat = zChat
@@ -58,12 +49,12 @@ class App extends Component {
     this.props.onRef(this)
 
     qnaChat.init({
-      account_key: BOT_ACCOUNT_KEY,
-      endpoint: BOT_ENDPOINT,
-      services_check_url: SERVICES_CHECK_URL
+      account_key: this.props.botAccountKey,
+      endpoint: this.props.botEndpoint,
+      services_check_url: this.props.servicesCheckUrl
     })
     zChat.init({
-      account_key: ACCOUNT_KEY
+      account_key: this.props.chatAccountKey
     })
 
     const events = [
@@ -478,7 +469,7 @@ class App extends Component {
             }
 
             return [...new Set([...res, ...remoteKeywords])]
-          }, KEYWORDS)
+          }, this.props.keywords)
           .filter(k => !!k)
 
         const clientTime = new Date()
@@ -682,7 +673,7 @@ class App extends Component {
   }
 
   render() {
-    if (!ACCOUNT_KEY) {
+    if (!this.props.chatAccountKey) {
       if (ENV === 'dev') {
         return (
           <div className="warning-container">
@@ -758,7 +749,17 @@ class App extends Component {
 App.displayName = 'App'
 
 App.propTypes = {
-  theme: PropTypes.string
+  theme: PropTypes.string,
+  chatAccountKey: PropTypes.string,
+  botAccountKey: PropTypes.string,
+  botEndpoint: PropTypes.string,
+  emailAddress: PropTypes.string,
+  servicesCheckUrl: PropTypes.string,
+  keywords: PropTypes.array
+}
+
+App.defaultProps = {
+  keywords: ['operatore']
 }
 
 const mapStateToProps = state => {
