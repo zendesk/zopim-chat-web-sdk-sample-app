@@ -44,7 +44,6 @@ class MessageList extends Component {
         );
       case 'chat.memberjoin':
       case 'chat.memberleave':
-      case 'chat.wait_queue':
       case 'typing':
         return (
           <SystemMessage
