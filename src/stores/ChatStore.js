@@ -96,8 +96,10 @@ function update(state = DEFAULT_STATE, action) {
 					});
 
 					return new_state;
+				case 'chat.queue_position':
+					new_state.queue_position = action.detail.queue_position;
+					return new_state;
 				case 'chat.file':
-				case 'chat.wait_queue':
 				case 'chat.request.rating':
 				case 'chat.msg':
 					// Ensure that triggers are uniquely identified by their display names

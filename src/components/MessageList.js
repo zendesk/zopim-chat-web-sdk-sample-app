@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ChatMessage from 'components/ChatMessage';
 import SystemMessage from 'components/SystemMessage';
+import QueuePosition from 'components/QueuePosition';
 import Avatar from 'components/Avatar';
 import OfflineForm from 'components/OfflineForm';
 import PrechatForm from 'components/PrechatForm';
@@ -43,7 +44,6 @@ class MessageList extends Component {
         );
       case 'chat.memberjoin':
       case 'chat.memberleave':
-      case 'chat.wait_queue':
       case 'typing':
         return (
           <SystemMessage
@@ -122,10 +122,12 @@ class MessageList extends Component {
   }
 
   render() {
+    const { isOffline, agents, messages, queuePosition } = this.props;
     return (
       <div className="message-list-container">
-        <div>{this.renderAll(this.props.isOffline, this.props.messages)}</div>
-        {this.renderTyping(this.props.agents)}
+        <div>{this.renderAll(isOffline, messages)}</div>
+        <QueuePosition position={queuePosition} />
+        {this.renderTyping(agents)}
       </div>
     );
   }
@@ -136,11 +138,13 @@ MessageList.propTypes = {
   messages: React.PropTypes.array,
   agents: React.PropTypes.object,
   isOffline: React.PropTypes.bool,
-  isChatting: React.PropTypes.bool
+  isChatting: React.PropTypes.bool,
+  queuePosition: React.PropTypes.number
 };
 MessageList.defaultProps = {
   messages: [],
-  agents: {}
+  agents: {},
+  queuePosition: 0
 };
 
 export default MessageList;

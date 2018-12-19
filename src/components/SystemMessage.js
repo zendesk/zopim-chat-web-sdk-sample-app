@@ -13,8 +13,6 @@ class SystemMessage extends Component {
         return `${this.props.message.display_name} has joined the chat`;
       case 'chat.memberleave':
         return `${this.props.message.display_name} has left the chat`;
-      case 'chat.wait_queue':
-        return `Please wait. There are currently ${msg.wait_queue} people(s) in the queue.`;
       default:
         return JSON.stringify(msg);
     }

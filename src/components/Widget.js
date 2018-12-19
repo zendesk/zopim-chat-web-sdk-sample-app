@@ -253,6 +253,7 @@ class App extends Component {
             minimizeOnClick={this.minimizeOnClick}
           />
           <MessageList
+            queuePosition={this.props.data.queue_position}
             isChatting={this.props.data.is_chatting}
             isOffline={isOffline}
             messages={this.props.data && this.props.data.chats.toArray()}
