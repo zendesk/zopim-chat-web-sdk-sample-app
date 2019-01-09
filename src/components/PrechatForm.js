@@ -20,6 +20,14 @@ class PrechatForm extends Component {
 
   send(event) {
     event.preventDefault();
+
+    // Use HTML form validation to validate inputs
+    const form = this.refs.form;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
     const msg = this.refs.message.value;
 
     // Don't send empty messages
@@ -47,19 +55,19 @@ class PrechatForm extends Component {
 
   renderChild() {
     return (
-      <form key="not-sent" className="offline-form">
+      <form ref="form" key="not-sent" className="offline-form">
         <div className="content">
           <div className="section">
             <label className="label">Name</label>
-            <input ref="name" />
+            <input ref="name" maxLength="255" />
           </div>
           <div className="section">
             <label className="label">Email</label>
-            <input ref="email" />
+            <input ref="email" pattern={`${zChat.EMAIL_REGEX.source}`} />
           </div>
           <div className="section">
             <label className="label">Message</label>
-            <textarea ref="message" />
+            <textarea required ref="message" />
           </div>
         </div>
         <div className="button-container">
