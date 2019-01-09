@@ -9,6 +9,7 @@ import Avatar from 'components/Avatar';
 import OfflineForm from 'components/OfflineForm';
 import PrechatForm from 'components/PrechatForm';
 import ChatRating from 'components/ChatRating';
+import zChat from 'vendor/web-sdk';
 
 class MessageList extends Component {
   constructor(props) {
@@ -25,6 +26,9 @@ class MessageList extends Component {
       if (node.children.length > 0) {
         setTimeout(() => {
           node.children[node.children.length - 1].scrollIntoView();
+          if (this.props.visible) {
+            zChat.markAsRead();
+          }
         });
       }
     }
@@ -135,6 +139,7 @@ class MessageList extends Component {
 
 MessageList.displayName = 'MessageList';
 MessageList.propTypes = {
+  visible: React.PropTypes.bool,
   messages: React.PropTypes.array,
   agents: React.PropTypes.object,
   isOffline: React.PropTypes.bool,
