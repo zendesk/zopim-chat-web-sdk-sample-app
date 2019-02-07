@@ -55,8 +55,13 @@ class MessageList extends Component {
             message={msg}
           />
         );
-      case 'chat.rating':
-        return <ChatRating key={msg.type + msg.timestamp}/>;
+      case 'chat.request.rating':
+        return (
+          <ChatRating
+            key={msg.type + msg.timestamp}
+            agent={this.props.agents[msg.nick]}
+          />
+        );
       case 'offline':
         return <OfflineForm key="offline" />;
       case 'prechat':
