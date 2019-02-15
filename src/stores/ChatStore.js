@@ -99,8 +99,50 @@ function update(state = DEFAULT_STATE, action) {
 				case 'chat.queue_position':
 					new_state.queue_position = action.detail.queue_position;
 					return new_state;
-				case 'chat.file':
 				case 'chat.request.rating':
+					var chatStoreArray = state.chats.store.toArray();
+
+					// Ensure that triggers are uniquely identified by their display names
+					if (isTrigger(action.detail.nick))
+						action.detail.nick = `agent:trigger:${action.detail.display_name}`;
+
+					// Stop rendering earlier rating requests
+					for (var i = chatStoreArray.length - 1; i >= 0; i--) {
+						if (chatStoreArray[i].value.type === 'chat.request.rating') {
+							chatStoreArray[i].value.shouldDisplay = false;
+							break;
+						}
+					}
+
+					new_state.chats = state.chats.concat({
+						[action.detail.timestamp]: {
+							...action.detail
+						}
+					});
+
+					return new_state;
+				case 'chat.rating':
+					var chatStoreArray = state.chats.store.toArray();
+
+					// Ensure that triggers are uniquely identified by their display names
+					if (isTrigger(action.detail.nick))
+						action.detail.nick = `agent:trigger:${action.detail.display_name}`;
+
+					for (var i = chatStoreArray.length - 1; i >= 0; i--) {
+						if (chatStoreArray[i].value.type === 'chat.request.rating') {
+							chatStoreArray[i].value.hasRating = action.detail.new_rating ? true : false;
+							break;
+						}
+					}
+
+					new_state.chats = state.chats.concat({
+						[action.detail.timestamp]: {
+							...action.detail
+						}
+					});
+
+					return new_state;
+				case 'chat.file':
 				case 'chat.msg':
 					// Ensure that triggers are uniquely identified by their display names
 					if (isTrigger(action.detail.nick))

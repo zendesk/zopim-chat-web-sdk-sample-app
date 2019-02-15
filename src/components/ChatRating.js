@@ -8,44 +8,42 @@ import zChat from 'vendor/web-sdk';
 class ChatRating extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      rating : zChat.getChatInfo().rating
-    }
-    this.rateDownButtonOnClick = this.rateDownButtonOnClick.bind(this);
-    this.rateUpButtonOnClick = this.rateUpButtonOnClick.bind(this);
+
+    this.rateBadButtonOnClick = this.rateBadButtonOnClick.bind(this);
+    this.rateGoodButtonOnClick = this.rateGoodButtonOnClick.bind(this);
     this.rateAgainButtonOnClick = this.rateAgainButtonOnClick.bind(this);
   }
 
-  rateDownButtonOnClick() {
+  rateBadButtonOnClick() {
     zChat.sendChatRating('bad');
-    this.setState({rating: 'bad'});
   }
 
-  rateUpButtonOnClick() {
+  rateGoodButtonOnClick() {
     zChat.sendChatRating('good');
-    this.setState({rating: 'good'});
   }
 
   rateAgainButtonOnClick() {
     zChat.sendChatRating(null);
-    this.setState({rating: null});
   }
 
   render() {
-    if (this.state.rating === null) {
+    if (this.props.shouldDisplay === false) {
+      return null;
+    }
+    if (!this.props.hasRating) {
       return (
         <CardContainer title="Chat Rating" addClass="chat-rating-card">
           {this.props.agent.display_name} has requested you to rate the chat service.
           <div className="buttons-container">
             <ActionButton
-              addClass="button button-rate-down"
-              label="Rate down"
-              onClick={this.rateDownButtonOnClick}
+              addClass="button button-rate-bad"
+              label="Rate Bad"
+              onClick={this.rateBadButtonOnClick}
             />
             <ActionButton
-              addClass="button button-rate-up"
-              label="Rate up"
-              onClick={this.rateUpButtonOnClick}
+              addClass="button button-rate-good"
+              label="Rate Good"
+              onClick={this.rateGoodButtonOnClick}
             />
           </div>
         </CardContainer>
@@ -53,7 +51,7 @@ class ChatRating extends Component {
     } else {
       return (
         <CardContainer title="Chat Rating" addClass="chat-rating-card">
-          You have rated the chat service {this.state.rating}.
+          You have rated the chat service.
           <div className="buttons-container">
             <ActionButton
               addClass="button button-rate-again"
@@ -70,9 +68,13 @@ class ChatRating extends Component {
 
 ChatRating.displayName = 'ChatRating';
 ChatRating.propTypes = {
-  agent: React.PropTypes.object
+  agent: React.PropTypes.object,
+  hasRating: React.PropTypes.bool,
+  shouldDisplay: React.PropTypes.bool
 };
 ChatRating.defaultProps = {
+  hasRating: null,
+  shouldDisplay: true
 };
 
 export default ChatRating;

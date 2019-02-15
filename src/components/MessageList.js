@@ -48,6 +48,7 @@ class MessageList extends Component {
         );
       case 'chat.memberjoin':
       case 'chat.memberleave':
+      case 'chat.rating':
       case 'typing':
         return (
           <SystemMessage
@@ -60,6 +61,8 @@ class MessageList extends Component {
           <ChatRating
             key={msg.type + msg.timestamp}
             agent={this.props.agents[msg.nick]}
+            hasRating={msg.hasRating}
+            shouldDisplay={msg.shouldDisplay}
           />
         );
       case 'offline':
