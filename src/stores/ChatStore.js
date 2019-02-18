@@ -10,6 +10,7 @@ const DEFAULT_STATE = {
 	agents: {},
 	chats: SortedMap(),
 	last_timestamp: 0,
+	last_rating_request_timestamp: 0,
 	is_chatting: false
 };
 
@@ -100,18 +101,11 @@ function update(state = DEFAULT_STATE, action) {
 					new_state.queue_position = action.detail.queue_position;
 					return new_state;
 				case 'chat.request.rating':
-					var chatStoreArray = state.chats.store.toArray();
-
-					// Ensure that triggers are uniquely identified by their display names
-					if (isTrigger(action.detail.nick))
-						action.detail.nick = `agent:trigger:${action.detail.display_name}`;
-
 					// Stop rendering earlier rating requests
-					for (var i = chatStoreArray.length - 1; i >= 0; i--) {
-						if (chatStoreArray[i].value.type === 'chat.request.rating') {
-							chatStoreArray[i].value.shouldDisplay = false;
-							break;
-						}
+					if (state.last_rating_request_timestamp !== 0) {
+						state.chats.store.get({
+							key: `${state.last_rating_request_timestamp}`
+						}).value.shouldDisplay = false;
 					}
 
 					new_state.chats = state.chats.concat({
@@ -120,20 +114,14 @@ function update(state = DEFAULT_STATE, action) {
 						}
 					});
 
-					return new_state;
+					return {
+						...new_state,
+						last_rating_request_timestamp: action.detail.timestamp
+					};
 				case 'chat.rating':
-					var chatStoreArray = state.chats.store.toArray();
-
-					// Ensure that triggers are uniquely identified by their display names
-					if (isTrigger(action.detail.nick))
-						action.detail.nick = `agent:trigger:${action.detail.display_name}`;
-
-					for (var i = chatStoreArray.length - 1; i >= 0; i--) {
-						if (chatStoreArray[i].value.type === 'chat.request.rating') {
-							chatStoreArray[i].value.hasRating = action.detail.new_rating ? true : false;
-							break;
-						}
-					}
+					state.chats.store.get({
+						key: `${state.last_rating_request_timestamp}`
+					}).value.hasRating = action.detail.new_rating ? true : false;
 
 					new_state.chats = state.chats.concat({
 						[action.detail.timestamp]: {
