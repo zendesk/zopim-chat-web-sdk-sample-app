@@ -11,6 +11,7 @@ const DEFAULT_STATE = {
 	chats: SortedMap(),
 	last_timestamp: 0,
 	last_rating_request_timestamp: 0,
+	has_rating: false,
 	is_chatting: false
 };
 
@@ -101,13 +102,6 @@ function update(state = DEFAULT_STATE, action) {
 					new_state.queue_position = action.detail.queue_position;
 					return new_state;
 				case 'chat.request.rating':
-					// Stop rendering earlier rating requests
-					if (state.last_rating_request_timestamp !== 0) {
-						state.chats.store.get({
-							key: `${state.last_rating_request_timestamp}`
-						}).value.shouldDisplay = false;
-					}
-
 					new_state.chats = state.chats.concat({
 						[action.detail.timestamp]: {
 							...action.detail
@@ -119,17 +113,16 @@ function update(state = DEFAULT_STATE, action) {
 						last_rating_request_timestamp: action.detail.timestamp
 					};
 				case 'chat.rating':
-					state.chats.store.get({
-						key: `${state.last_rating_request_timestamp}`
-					}).value.hasRating = action.detail.new_rating ? true : false;
-
 					new_state.chats = state.chats.concat({
 						[action.detail.timestamp]: {
 							...action.detail
 						}
 					});
 
-					return new_state;
+					return {
+						...new_state,
+						has_rating: action.detail.new_rating ? true : false
+					};
 				case 'chat.file':
 				case 'chat.msg':
 					// Ensure that triggers are uniquely identified by their display names
