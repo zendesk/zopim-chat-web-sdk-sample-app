@@ -289,11 +289,16 @@ svg {
     color: #BFBFBF;
 }
 
-.card-container {
+.chat-rating-card {
     padding-top: 16px;
     padding-bottom: 16px;
     position: relative;
     text-align: center;
+}
+
+.card-container {
+    padding-top: 16px;
+    position: relative;
 }
 
 .card-title {
