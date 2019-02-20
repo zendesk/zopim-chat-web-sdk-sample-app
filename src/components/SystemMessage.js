@@ -18,7 +18,7 @@ class SystemMessage extends Component {
           return 'You have removed the chat rating';
         }
         else {
-          const rating = convertToTitleCase(this.props.message.new_rating);
+          const rating = convertToSentenceCase(this.props.message.new_rating);
           return `You have rated the chat service ${rating}`
         }
       default:
@@ -35,7 +35,7 @@ class SystemMessage extends Component {
   }
 }
 
-function convertToTitleCase(str) {
+function convertToSentenceCase(str) {
   return str[0].toUpperCase() + str.slice(1);
 }
 
