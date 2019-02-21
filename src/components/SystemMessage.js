@@ -13,6 +13,14 @@ class SystemMessage extends Component {
         return `${this.props.message.display_name} has joined the chat`;
       case 'chat.memberleave':
         return `${this.props.message.display_name} has left the chat`;
+      case 'chat.rating':
+        if (!this.props.message.new_rating) {
+          return 'You have removed the chat rating';
+        }
+        else {
+          const rating = convertToSentenceCase(this.props.message.new_rating);
+          return `You have rated the chat service ${rating}`
+        }
       default:
         return JSON.stringify(msg);
     }
@@ -25,6 +33,10 @@ class SystemMessage extends Component {
       </div>
     );
   }
+}
+
+function convertToSentenceCase(str) {
+  return str[0].toUpperCase() + str.slice(1);
 }
 
 SystemMessage.displayName = 'SystemMessage';

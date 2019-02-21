@@ -48,6 +48,7 @@ class MessageList extends Component {
         );
       case 'chat.memberjoin':
       case 'chat.memberleave':
+      case 'chat.rating':
       case 'typing':
         return (
           <SystemMessage
@@ -55,8 +56,15 @@ class MessageList extends Component {
             message={msg}
           />
         );
-      case 'chat.rating':
-        return <ChatRating key={msg.type + msg.timestamp}/>;
+      case 'chat.request.rating':
+        return (
+          <ChatRating
+            key={msg.type + msg.timestamp}
+            agent={this.props.agents[msg.nick]}
+            hasRating={this.props.hasRating}
+            shouldDisplay={msg.timestamp === this.props.lastRatingRequestTimestamp}
+          />
+        );
       case 'offline':
         return <OfflineForm key="offline" />;
       case 'prechat':
@@ -144,12 +152,16 @@ MessageList.propTypes = {
   agents: React.PropTypes.object,
   isOffline: React.PropTypes.bool,
   isChatting: React.PropTypes.bool,
-  queuePosition: React.PropTypes.number
+  queuePosition: React.PropTypes.number,
+  lastRatingRequestTimestamp: React.PropTypes.number,
+  hasRating: React.PropTypes.bool
 };
 MessageList.defaultProps = {
   messages: [],
   agents: {},
-  queuePosition: 0
+  queuePosition: 0,
+  lastRatingRequestTimestamp: 0,
+  hasRating: false
 };
 
 export default MessageList;

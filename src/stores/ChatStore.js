@@ -10,6 +10,8 @@ const DEFAULT_STATE = {
 	agents: {},
 	chats: SortedMap(),
 	last_timestamp: 0,
+	last_rating_request_timestamp: 0,
+	has_rating: false,
 	is_chatting: false
 };
 
@@ -99,8 +101,29 @@ function update(state = DEFAULT_STATE, action) {
 				case 'chat.queue_position':
 					new_state.queue_position = action.detail.queue_position;
 					return new_state;
-				case 'chat.file':
 				case 'chat.request.rating':
+					new_state.chats = state.chats.concat({
+						[action.detail.timestamp]: {
+							...action.detail
+						}
+					});
+
+					return {
+						...new_state,
+						last_rating_request_timestamp: action.detail.timestamp
+					};
+				case 'chat.rating':
+					new_state.chats = state.chats.concat({
+						[action.detail.timestamp]: {
+							...action.detail
+						}
+					});
+
+					return {
+						...new_state,
+						has_rating: action.detail.new_rating ? true : false
+					};
+				case 'chat.file':
 				case 'chat.msg':
 					// Ensure that triggers are uniquely identified by their display names
 					if (isTrigger(action.detail.nick))

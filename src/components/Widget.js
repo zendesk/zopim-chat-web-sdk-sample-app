@@ -260,6 +260,8 @@ class App extends Component {
             messages={this.props.data && this.props.data.chats.toArray()}
             agents={this.props.data.agents}
             entities={entities}
+            lastRatingRequestTimestamp={this.props.data.last_rating_request_timestamp}
+            hasRating={this.props.data.has_rating}
           />
           <div className={`spinner-container ${this.state.visible && this.props.data.connection !== 'connected' ? 'visible' : ''}`}>
             <div className="spinner"></div>

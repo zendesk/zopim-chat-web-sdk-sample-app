@@ -289,6 +289,11 @@ svg {
     color: #BFBFBF;
 }
 
+.chat-rating-card {
+    padding-bottom: 16px;
+    text-align: center;
+}
+
 .card-container {
     padding-top: 16px;
     position: relative;
@@ -442,6 +447,7 @@ svg {
     border-radius: 4px;
     text-align: center;
     opacity: 1;
+    outline: none;
 
     &:hover {
         opacity: 0.8;
