@@ -8,11 +8,11 @@ export function log() {
 }
 
 export function isAgent(nick){
-	return nick.startsWith('agent:');
+	return nick.indexOf('agent:') === 0;
 }
 
 export function isTrigger(nick) {
-	return nick.startsWith('agent:trigger');
+	return nick.indexOf('agent:trigger') === 0;
 }
 
 export * from'./PersistentStorage';

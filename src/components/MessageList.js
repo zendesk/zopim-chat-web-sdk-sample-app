@@ -75,7 +75,8 @@ class MessageList extends Component {
   }
 
   renderTyping(agents) {
-    const agent_names = Object.values(agents)
+    const agent_names = Object.keys(agents)
+      .map(key => agents[key])
       .filter((agent) => agent.typing);
     return agent_names.map((agent) => {
       return (

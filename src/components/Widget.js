@@ -181,14 +181,16 @@ class App extends Component {
     }
 
     if (agents && Object.keys(agents).length) {
-      Object.values(agents).forEach((agent) => {
-        if (!agent.nick) return;
+      Object.keys(agents)
+        .map(key => agents[key])
+        .forEach((agent) => {
+          if (!agent.nick) return;
 
-        entities[agent.nick] = {
-          ...agent,
-          type: 'agent'
-        };
-      });
+          entities[agent.nick] = {
+            ...agent,
+            type: 'agent'
+          };
+        });
     }
 
     if (this.props.data.account_status === 'offline' && !this.props.data.is_chatting) {

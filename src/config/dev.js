@@ -6,4 +6,7 @@ let config = {
   ENV: 'dev'
 };
 
-export default Object.freeze(Object.assign({}, baseConfig, config));
+export default Object.freeze({
+  ...baseConfig,
+  ...config
+});
