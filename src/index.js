@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import '@babel/polyfill';
+
 import Widget from 'components/Widget';
 import { Provider } from 'react-redux'
 import ChatStore from 'stores/ChatStore';
