@@ -34,7 +34,7 @@
     "bower-webpack-plugin": "^0.1.9",
     "copyfiles": "^0.2.1",
     "css-loader": "^0.23.0",
-    "eslint": "^2.2.0",
+    "eslint": "^4.19.1",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^5.0.0",
     "file-loader": "^0.8.4",
