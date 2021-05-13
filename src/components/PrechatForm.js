@@ -1,37 +1,37 @@
-"use strict";
+'use strict'
 
-import React, { Component } from "react";
-import CardContainer from "components/CardContainer";
-import MessageSvg from "components/MessageSvg";
-import ActionButton from "components/ActionButton";
-import { log } from "utils";
-import { connect } from "react-redux";
-import zChat from "vendor/web-sdk";
+import React, { Component } from 'react'
+import CardContainer from 'components/CardContainer'
+import MessageSvg from 'components/MessageSvg'
+import ActionButton from 'components/ActionButton'
+import { log } from 'utils'
+import { connect } from 'react-redux'
+import zChat from 'vendor/web-sdk'
 
 class PrechatForm extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       sent: false,
-    };
-    this.send = this.send.bind(this);
-    this.renderChild = this.renderChild.bind(this);
+    }
+    this.send = this.send.bind(this)
+    this.renderChild = this.renderChild.bind(this)
   }
 
   send(event) {
-    event.preventDefault();
+    event.preventDefault()
 
     // Use HTML form validation to validate inputs
-    const form = this.refs.form;
+    const form = this.refs.form
     if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
+      form.reportValidity()
+      return
     }
 
-    const msg = this.refs.message.value;
+    const msg = this.refs.message.value
 
     // Don't send empty messages
-    if (!msg) return;
+    if (!msg) return
 
     zChat.setVisitorInfo(
       {
@@ -39,21 +39,21 @@ class PrechatForm extends Component {
         email: this.refs.email.value,
       },
       (err) => {
-        if (err) return;
+        if (err) return
 
         zChat.sendChatMsg(msg, (err) => {
-          if (err) log("Error sending message");
-        });
+          if (err) log('Error sending message')
+        })
       }
-    );
+    )
 
     this.props.dispatch({
-      type: "synthetic",
+      type: 'synthetic',
       detail: {
-        type: "visitor_send_msg",
+        type: 'visitor_send_msg',
         msg: msg,
       },
-    });
+    })
   }
 
   renderChild() {
@@ -74,14 +74,10 @@ class PrechatForm extends Component {
           </div>
         </div>
         <div className="button-container">
-          <ActionButton
-            addClass="button-send"
-            label="Send"
-            onClick={this.send}
-          />
+          <ActionButton addClass="button-send" label="Send" onClick={this.send} />
         </div>
       </form>
-    );
+    )
   }
 
   render() {
@@ -89,19 +85,19 @@ class PrechatForm extends Component {
       <CardContainer
         title="Introduce yourself!"
         addClass="offline-card"
-        contentAddClass={this.state.sent ? "sent" : ""}
+        contentAddClass={this.state.sent ? 'sent' : ''}
         icon={<MessageSvg />}
       >
         {this.renderChild()}
       </CardContainer>
-    );
+    )
   }
 }
 
-PrechatForm.displayName = "PrechatForm";
+PrechatForm.displayName = 'PrechatForm'
 PrechatForm.propTypes = {
   onClick: React.PropTypes.func,
   addClass: React.PropTypes.string,
-};
+}
 
-export default connect()(PrechatForm);
+export default connect()(PrechatForm)

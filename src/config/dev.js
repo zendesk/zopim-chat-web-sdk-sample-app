@@ -1,9 +1,9 @@
-"use strict";
+'use strict'
 
-import baseConfig from "./base";
+import baseConfig from './base'
 
 let config = {
-  ENV: "dev",
-};
+  ENV: 'dev',
+}
 
-export default Object.freeze(Object.assign({}, baseConfig, config));
+export default Object.freeze(Object.assign({}, baseConfig, config))

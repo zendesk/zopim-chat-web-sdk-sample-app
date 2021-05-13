@@ -1,6 +1,6 @@
-"use strict";
+'use strict'
 
-import React, { Component } from "react";
+import React, { Component } from 'react'
 
 class MessageSvg extends Component {
   render() {
@@ -12,10 +12,10 @@ class MessageSvg extends Component {
           fillRule="evenodd"
         />
       </svg>
-    );
+    )
   }
 }
 
-MessageSvg.displayName = "MessageSvg";
+MessageSvg.displayName = 'MessageSvg'
 
-export default MessageSvg;
+export default MessageSvg

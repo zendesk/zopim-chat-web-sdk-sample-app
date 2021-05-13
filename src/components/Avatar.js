@@ -1,7 +1,7 @@
-"use strict";
+'use strict'
 
-import React, { Component } from "react";
-import { isAgent } from "utils";
+import React, { Component } from 'react'
+import { isAgent } from 'utils'
 
 class Avatar extends Component {
   getVisitorSvg() {
@@ -13,38 +13,34 @@ class Avatar extends Component {
           fillRule="evenodd"
         />
       </svg>
-    );
+    )
   }
 
   renderAvatar(entity) {
-    const style = {};
-    let child;
+    const style = {}
+    let child
     if (entity && isAgent(entity.nick) && entity.avatar_path) {
-      style.backgroundImage = `url('${entity.avatar_path}')`;
-      style.backgroundColor = "none";
+      style.backgroundImage = `url('${entity.avatar_path}')`
+      style.backgroundColor = 'none'
     } else {
-      child = this.getVisitorSvg();
+      child = this.getVisitorSvg()
     }
 
     return (
-      <div
-        className="avatar"
-        style={style}
-        title={entity ? entity.display_name : "Agent"}
-      >
+      <div className="avatar" style={style} title={entity ? entity.display_name : 'Agent'}>
         {child}
       </div>
-    );
+    )
   }
 
   render() {
-    return this.renderAvatar(this.props.entity);
+    return this.renderAvatar(this.props.entity)
   }
 }
 
-Avatar.displayName = "Avatar";
+Avatar.displayName = 'Avatar'
 Avatar.propTypes = {
   entity: React.PropTypes.object,
-};
+}
 
-export default Avatar;
+export default Avatar
