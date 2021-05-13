@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class CardContainer extends Component {
   constructor(props) {
@@ -9,12 +9,8 @@ class CardContainer extends Component {
   }
 
   renderIcon() {
-    const isString = typeof(this.props.icon) === 'string';
-    return (
-      <div className="card-icon">
-        {!isString && this.props.icon}
-      </div>
-    );
+    const isString = typeof this.props.icon === "string";
+    return <div className="card-icon">{!isString && this.props.icon}</div>;
   }
 
   render() {
@@ -30,14 +26,14 @@ class CardContainer extends Component {
   }
 }
 
-CardContainer.displayName = 'CardContainer';
+CardContainer.displayName = "CardContainer";
 CardContainer.propTypes = {
   icon: React.PropTypes.oneOfType([
     React.PropTypes.string,
-    React.PropTypes.element
+    React.PropTypes.element,
   ]),
   title: React.PropTypes.string,
   addClass: React.PropTypes.string,
-  contentAddClass: React.PropTypes.string
-}
+  contentAddClass: React.PropTypes.string,
+};
 export default CardContainer;

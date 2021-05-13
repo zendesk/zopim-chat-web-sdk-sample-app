@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-import React, { Component } from 'react';
-import CardContainer from 'components/CardContainer';
-import ActionButton from 'components/ActionButton';
-import zChat from 'vendor/web-sdk';
+import React, { Component } from "react";
+import CardContainer from "components/CardContainer";
+import ActionButton from "components/ActionButton";
+import zChat from "vendor/web-sdk";
 
 class ChatRating extends Component {
   constructor(props) {
@@ -15,11 +15,11 @@ class ChatRating extends Component {
   }
 
   rateBadButtonOnClick() {
-    zChat.sendChatRating('bad');
+    zChat.sendChatRating("bad");
   }
 
   rateGoodButtonOnClick() {
-    zChat.sendChatRating('good');
+    zChat.sendChatRating("good");
   }
 
   rateAgainButtonOnClick() {
@@ -33,7 +33,8 @@ class ChatRating extends Component {
     if (!this.props.hasRating) {
       return (
         <CardContainer title="Chat Rating" addClass="chat-rating-card">
-          {this.props.agent.display_name} has requested you to rate the chat service.
+          {this.props.agent.display_name} has requested you to rate the chat
+          service.
           <div className="buttons-container">
             <ActionButton
               addClass="button button-rate-bad"
@@ -60,21 +61,20 @@ class ChatRating extends Component {
             />
           </div>
         </CardContainer>
-      )
+      );
     }
   }
 }
 
-
-ChatRating.displayName = 'ChatRating';
+ChatRating.displayName = "ChatRating";
 ChatRating.propTypes = {
   agent: React.PropTypes.object,
   hasRating: React.PropTypes.bool,
-  shouldDisplay: React.PropTypes.bool
+  shouldDisplay: React.PropTypes.bool,
 };
 ChatRating.defaultProps = {
   hasRating: null,
-  shouldDisplay: true
+  shouldDisplay: true,
 };
 
 export default ChatRating;

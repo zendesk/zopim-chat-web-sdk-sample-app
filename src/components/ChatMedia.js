@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-import React, { Component } from 'react';
-import ChatImage from 'components/ChatImage';
+import React, { Component } from "react";
+import ChatImage from "components/ChatImage";
 
 class ChatMedia extends Component {
   constructor(props) {
@@ -33,9 +33,9 @@ class ChatMedia extends Component {
   }
 }
 
-ChatMedia.displayName = 'ChatMedia';
+ChatMedia.displayName = "ChatMedia";
 ChatMedia.propTypes = {
-  message: React.PropTypes.object
+  message: React.PropTypes.object,
 };
 
 export default ChatMedia;

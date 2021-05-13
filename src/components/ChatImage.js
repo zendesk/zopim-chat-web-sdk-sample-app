@@ -1,15 +1,19 @@
-'use strict';
+"use strict";
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class ChatImage extends Component {
   render() {
     return (
-      <a href={this.props.message.attachment.url} target="_blank" className="chat-img-container">
+      <a
+        href={this.props.message.attachment.url}
+        target="_blank"
+        className="chat-img-container"
+      >
         <div
           className="chat-img"
           style={{
-            backgroundImage: `url(${this.props.message.attachment.url})`
+            backgroundImage: `url(${this.props.message.attachment.url})`,
           }}
         />
       </a>
@@ -17,15 +21,14 @@ class ChatImage extends Component {
   }
 }
 
-
-ChatImage.displayName = 'ChatImage';
+ChatImage.displayName = "ChatImage";
 ChatImage.propTypes = {
-  message: React.PropTypes.object
+  message: React.PropTypes.object,
 };
 ChatImage.defaultProps = {
   message: {
-    url: ''
-  }
+    url: "",
+  },
 };
 
 export default ChatImage;

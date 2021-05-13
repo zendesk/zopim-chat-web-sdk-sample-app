@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import Avatar from 'components/Avatar';
-import ChatMedia from 'components/ChatMedia';
-import { log } from 'utils';
-import zChat from 'vendor/web-sdk';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Avatar from "components/Avatar";
+import ChatMedia from "components/ChatMedia";
+import { log } from "utils";
+import zChat from "vendor/web-sdk";
 
 class ChatMessage extends Component {
   constructor(props) {
@@ -22,19 +22,19 @@ class ChatMessage extends Component {
 
   optionOnChange(e) {
     const index = e.currentTarget.value,
-          msg = this.props.message.options[index];
+      msg = this.props.message.options[index];
     zChat.sendChatMsg(msg, (err) => {
       if (err) {
-        log('Error occured >>>', err);
+        log("Error occured >>>", err);
         return;
       }
     });
     this.props.dispatch({
-      type: 'synthetic',
+      type: "synthetic",
       detail: {
-        type: 'visitor_send_msg',
-        msg
-      }
+        type: "visitor_send_msg",
+        msg,
+      },
     });
   }
 
@@ -43,18 +43,26 @@ class ChatMessage extends Component {
 
     return (
       <div>
-      {
-        options.map((option, i) => {
-          return <div><input type="radio" name="option" value={i} onChange={this.optionOnChange}/> {option}</div>;
-        })
-      }
+        {options.map((option, i) => {
+          return (
+            <div>
+              <input
+                type="radio"
+                name="option"
+                value={i}
+                onChange={this.optionOnChange}
+              />{" "}
+              {option}
+            </div>
+          );
+        })}
       </div>
-    )
+    );
   }
 
   renderMessagePart(msg) {
     switch (msg.type) {
-      case 'chat.file':
+      case "chat.file":
         return <ChatMedia message={msg} />;
       default:
         return (
@@ -68,7 +76,11 @@ class ChatMessage extends Component {
 
   render() {
     return (
-      <div className={`chat-msg-container ${this.getClassName(this.props.message)} ${this.props.addClass}`}>
+      <div
+        className={`chat-msg-container ${this.getClassName(
+          this.props.message
+        )} ${this.props.addClass}`}
+      >
         <div className="avatar-container">
           <Avatar entity={this.props.agent} />
         </div>
@@ -80,16 +92,16 @@ class ChatMessage extends Component {
   }
 }
 
-ChatMessage.displayName = 'ChatMessage';
+ChatMessage.displayName = "ChatMessage";
 ChatMessage.propTypes = {
   message: React.PropTypes.object,
   agent: React.PropTypes.object,
-  addClass: React.PropTypes.string
+  addClass: React.PropTypes.string,
 };
 ChatMessage.defaultProps = {
   message: {
-    msg: ''
-  }
-}
+    msg: "",
+  },
+};
 
 export default connect()(ChatMessage);

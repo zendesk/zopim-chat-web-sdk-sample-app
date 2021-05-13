@@ -1,18 +1,18 @@
-'use strict';
+"use strict";
 
-import React, { Component } from 'react';
-import CardContainer from 'components/CardContainer';
-import MessageSvg from 'components/MessageSvg';
-import ActionButton from 'components/ActionButton';
-import { log } from 'utils';
-import { connect } from 'react-redux'
-import zChat from 'vendor/web-sdk';
+import React, { Component } from "react";
+import CardContainer from "components/CardContainer";
+import MessageSvg from "components/MessageSvg";
+import ActionButton from "components/ActionButton";
+import { log } from "utils";
+import { connect } from "react-redux";
+import zChat from "vendor/web-sdk";
 
 class PrechatForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sent: false
+      sent: false,
     };
     this.send = this.send.bind(this);
     this.renderChild = this.renderChild.bind(this);
@@ -33,23 +33,26 @@ class PrechatForm extends Component {
     // Don't send empty messages
     if (!msg) return;
 
-    zChat.setVisitorInfo({
-      display_name: this.refs.name.value,
-      email: this.refs.email.value
-    }, (err) => {
-      if (err) return;
+    zChat.setVisitorInfo(
+      {
+        display_name: this.refs.name.value,
+        email: this.refs.email.value,
+      },
+      (err) => {
+        if (err) return;
 
-      zChat.sendChatMsg(msg, (err) => {
-        if (err) log('Error sending message');
-      })
-    });
+        zChat.sendChatMsg(msg, (err) => {
+          if (err) log("Error sending message");
+        });
+      }
+    );
 
     this.props.dispatch({
-      type: 'synthetic',
+      type: "synthetic",
       detail: {
-        type: 'visitor_send_msg',
-        msg: msg
-      }
+        type: "visitor_send_msg",
+        msg: msg,
+      },
     });
   }
 
@@ -83,18 +86,22 @@ class PrechatForm extends Component {
 
   render() {
     return (
-      <CardContainer title="Introduce yourself!" addClass="offline-card" contentAddClass={this.state.sent ? 'sent' : ''} icon={ <MessageSvg /> }>
+      <CardContainer
+        title="Introduce yourself!"
+        addClass="offline-card"
+        contentAddClass={this.state.sent ? "sent" : ""}
+        icon={<MessageSvg />}
+      >
         {this.renderChild()}
       </CardContainer>
     );
   }
 }
 
-
-PrechatForm.displayName = 'PrechatForm';
+PrechatForm.displayName = "PrechatForm";
 PrechatForm.propTypes = {
   onClick: React.PropTypes.func,
-  addClass: React.PropTypes.string
+  addClass: React.PropTypes.string,
 };
 
 export default connect()(PrechatForm);
